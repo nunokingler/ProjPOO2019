@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="charsets">
+    <CLASSES>
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/charsets.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/deploy.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/javaws.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/jce.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/jfr.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/jfxswt.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/jsse.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/plugin.jar!/" />
+      <root url="jar://D:/Programs/Java Runtime Enviroment/lib/rt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
