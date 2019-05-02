@@ -12,42 +12,50 @@ public class ReadXMLFile {
 
         try {
 
-            File fXmlFile = new File("/Users/mkyong/staff.xml");
+            File fXMLFile = new File("C:/Users/henri/git/ProjPOO2019/bin/data1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            Document doc = dBuilder.parse(fXMLFile);
 
             //optional, but recommended
             //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            int temp1=0;
+            int temp2=0;
+            
+            System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 
-            NodeList nList = doc.getElementsByTagName("staff");
+            NodeList nList1 = doc.getElementsByTagName("node");
 
             System.out.println("----------------------------");
 
-            for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode1 = nList1.item(temp1);
 
-                Node nNode = nList.item(temp);
+                System.out.println("\nCurrent Element : " + nNode1.getNodeName());
 
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+                if (nNode1.getNodeType() == Node.ELEMENT_NODE) {
 
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode1;
 
-                    Element eElement = (Element) nNode;
+                    System.out.println("NodeIDX : " + eElement.getAttribute("nodeidx"));
+                   
+                    NodeList nList2 = doc.getElementsByTagName("weight");
+               	    Node nNode2= nList2.item(temp2);
+                    
+                    for (temp2 = 0; temp2 < nList2.getLength(); temp2++) {
+                    	
+                    	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
+                    	
+                    	 System.out.println("Target Node : " + eElement.getAttribute("targetnode"));
+                    
+                    	
+                    	 //System.out.println("TargetNode : " + eElement.getElementsByTagName("targetnode").item(0).getTextContent());
 
-                    System.out.println("Staff id : " + eElement.getAttribute("id"));
-                    System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-                    System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-                    System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-                    System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-
-                }
+                    }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
+  }
 }
