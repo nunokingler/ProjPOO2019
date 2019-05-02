@@ -7,6 +7,12 @@ public class Edge {
 	private float evaporation;
 	private int node1,node2;
 
+	public Edge(Edge e) {
+		this.weight=e.weight;
+		this.evaporation=e.evaporation;
+		this.node1=e.node1;
+		this.node2=e.node2;
+	}
 
 	public Edge(float weight, float evaporation, int node1, int node2) {
 		this.weight = weight;
@@ -21,7 +27,7 @@ public class Edge {
 		else if(N.getID()==node2){
 			return node1;
 		}
-		throw new NotThisEdge_exeption("This edge does not connect to that node",this);
+		throw new NotThisEdge_exeption("This edge does not connect to that node",this,N.getID());
 	}
 
 	@Override
