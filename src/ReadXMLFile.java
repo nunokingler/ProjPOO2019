@@ -46,8 +46,9 @@ public class ReadXMLFile {
                     for (temp2 = 0; temp2 < nList2.getLength(); temp2++) {
                     	
                     	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
-                    	
-                    	 System.out.println("Target Node : " + eElement.getAttribute("targetnode"));
+                    		 
+                    		Element eElement = (Element) nNode2;
+                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode"));
                     
                     	
                     	 //System.out.println("TargetNode : " + eElement.getElementsByTagName("targetnode").item(0).getTextContent());
