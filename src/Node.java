@@ -77,7 +77,6 @@ public class Node {
 				Path.add(this);
 				return Node.calc_probs(this,arr);
 			}
-
 		return -1;
 	}
 	private static int calc_probs(Node s, ArrayList<Node> to_avoid){
@@ -116,7 +115,6 @@ public class Node {
 				counter++;
 				total+= probability;
 			}
-
 		}
 		Random r = new Random();
 		float ticket = r.nextFloat();
@@ -131,7 +129,9 @@ public class Node {
 	public int getEdgeNmbr(){
 		return edges.size();
 	}
-	private ListIterator<Edge> getEdges(){
+
+
+	public ListIterator<Edge> getEdges(){
 		ArrayList<Edge> edg = new ArrayList<Edge>();
 		for(int i= 0;i<edges.size();i++){
 			edg.add( new Edge(edges.get(i)));
