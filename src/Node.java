@@ -2,6 +2,7 @@
 //contains a list of weights
 
 import jdk.internal.org.objectweb.asm.tree.analysis.SourceValue;
+import sun.awt.geom.Curve;
 
 import java.util.*;
 
@@ -64,25 +65,20 @@ public class Node {
 		}
 		if(Path.get(Path.size()-1)==this)
 			Path.remove(this);
-		try{
-			if(edges.size()==1 || (edges.size()==2 && previNode!=NULL)){
-				//TODO estamos num beco gentleman
 
+			if(edges.size()==1 || (edges.size()==2 && previNode!=null)){//Estamos ou viemos de um beco
+				Path.get(Path.size()-1).next(Path,this);
 			}
-
 			else{//EVERYTHING IS GOOD, calc probability and add node to chain
 				ArrayList<Node> arr= new ArrayList<Node>();
 				arr.add(Path.get(Path.size()-1));
+				if(previNode!=null)
+					arr.add(previNode);
 				Path.add(this);
 				return Node.calc_probs(this,arr);
 			}
-		}
-		catch(NotThisEdge_exeption ex){
-			ex.print_da_data();
-			System.out.println(ex.getMessage());
-			ex.printStackTrace();
-		}
-		return nextNode;
+
+		return -1;
 	}
 	private static int calc_probs(Node s, ArrayList<Node> to_avoid){
 		int nmbrOfProbs= s.getEdgeNmbr(), counter=0;
