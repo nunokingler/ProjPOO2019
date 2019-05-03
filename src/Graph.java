@@ -10,7 +10,5 @@ public class Graph {
 		this.nbnodes=nodes;
 		this.nestnode=nest;
 	}
-		
-
 	
 }
