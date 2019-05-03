@@ -10,7 +10,7 @@ public class Graph {
 	private int nestnode;
 	private HashMap<Integer,Node> nodes;
 	private HashMap<String,Edge> edges;
-	
+
 	Graph(int nodes, int nest){
 		this.nbnodes=nodes;
 		this.nestnode=nest;
@@ -58,4 +58,5 @@ public class Graph {
 		}
 		nodes.put(nodeNmbr,to_add);
 	}
+
 }
