@@ -1,5 +1,6 @@
 public class Simulation {
 
-    public float finalinst,plevel;
-    public int antcolsize;
+	private float finalinst,plevel;
+    private int antcolsize;
+   
 }
