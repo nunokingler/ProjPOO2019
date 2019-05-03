@@ -20,6 +20,15 @@ public class Edge {
 		this.node1 = node1;
 		this.node2 = node2;
 	}
+
+	public float getWeight() {
+		return weight;
+	}
+
+	public float getPheromoneLevel() {
+		return pheromoneLevel;
+	}
+
 	public int otherNode(Node N)throws NotThisEdge_exeption{
 		if(N.getID()==node1){
 			return node2;

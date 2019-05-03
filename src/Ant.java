@@ -5,10 +5,13 @@ import java.util.Random;
 public class Ant {
     private Node current_node;
     private ArrayList<Node> path;
+    private float alpha, beta;
 
-    public Ant(Node current_node) {
+    public Ant(Node current_node,float al,float bt) {
         this.current_node = current_node;
         path=new ArrayList<Node>();
+        alpha=al;
+        beta=bt;
     }
 
     public int next(ArrayList<Node> Path, Node previNode)  {
@@ -22,15 +25,17 @@ public class Ant {
         if(current_node.getEdgeNmbr()==1 || (current_node.getEdgeNmbr()==2 && previNode!=null)){//Estamos ou viemos de um beco
             Node temp= path.get(path.size()-1);
             path.remove(temp);
-            Path.get(Path.size()-1).next(Path,temp);
+            current_node=path.get(path.size()-1);
+            return this.next(path,temp);
+            //Path.get(Path.size()-1).next(Path,temp);
         }
         else{//EVERYTHING IS GOOD, calc probability and add node to chain
             ArrayList<Node> arr= new ArrayList<Node>();
             arr.add(Path.get(Path.size()-1));
             if(previNode!=null)
                 arr.add(previNode);
-            Path.add(this);
-            return Node.calc_probs(this,arr);
+            path.add(current_node);
+            return Ant.calc_probs(current_node,arr);
         }
         return -1;
     }
@@ -58,7 +63,6 @@ public class Ant {
                     ex.printStackTrace();
                 }
             }
-
             if(is_valid){//IF THIS EDGE IS VALID ADD IT TO THE FORMULA
                 float probability= 1+1;//TODO FORMULA
                 probs[counter]= probability;
