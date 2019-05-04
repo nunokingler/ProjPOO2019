@@ -19,43 +19,7 @@ public class Ant implements EventHolder{
         this.colony=colony;
         event = new AntMoveEvent(this,sig);
     }
-/*
-    public double next( Node previNode)  {
-        int nextNode=0;
-        float travel_time;
-        try {
-            if (current_node.getEdgeNmbr() == 1 || (current_node.getEdgeNmbr() == 2 && previNode != null)) {//We are or came from a no way out path
-                Node temp = path.get(path.size() - 1);
-                path.remove(temp);                                                                          //this node is no good so we remove it from the path
-                current_node = path.get(path.size() - 1);                                                   // get the new current node
-                Edge travel_back_edge = current_node.getEdgeTo(temp);                                       //and the edge we took to get to it
-                travel_time = travelTime(travel_back_edge);                                                 // calculate the travel time to go back
-                return travel_time + this.next(temp);                                                       //and join it with the travel time to go for a new node
-            }
 
-            else {                                                                                          //EVERYTHING IS GOOD, calc probability and add node to chain
-                ArrayList<Node> arr = new ArrayList<>();                                                    //this is the list of nodes to avoid
-                arr.add(path.get(path.size() - 1));                                                         //we avoid the node we came from
-                if (previNode != null)                                                                      //and if in a no way out we also add it to the avoid list
-                    arr.add(previNode);
-                path.add(current_node);                                                                     //add the current node to the path
-                Node new_node = Ant.calc_probs(current_node, arr);
-                travel_time = travelTime(new_node.getEdgeTo(current_node));
-                return travel_time;
-            }
-        }catch (NotThisEdge_exeption notThisEdge_exeption) {
-            notThisEdge_exeption.printStackTrace();
-        }
-        if(path.get(0).getID()==current_node.getID()){
-            if(colony.isHamiltonian(path.listIterator())){
-                //TODO meter ferormonas nessa cena
-                path=new ArrayList<>();
-                path.add(current_node);
-            }
-            else
-        }
-        return 0;
-    }*/
     public float nextHop(){
         ListIterator<Edge> edges = current_node.getEdges();
         boolean hasUnvisitedNodes= false;
@@ -73,7 +37,7 @@ public class Ant implements EventHolder{
                 path.add(current_node);
             }
             else{
-                current_node= calc_probs(current_node,new ArrayList<Node>());
+                current_node= calc_probs(current_node,new ArrayList<>());
                 int index= path.indexOf(current_node);
                 for(int i= index+1;i<path.size()-1;i++){
                     path.remove(i);
