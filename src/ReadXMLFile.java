@@ -34,14 +34,13 @@ public class ReadXMLFile {
 
 		public static void main(String argv[]) throws Exception{
 			fileName=xmlFile.getName();
-			
+			try {
 			SAXParserFactory fact = SAXParserFactory.newInstance();
 			SAXParser saxParser = fact.newSAXParser();
 
 			// parse the XML document with this handler
-			DefaultHandler handler = new ReadXMLFile();
+			DefaultHandler handler = new SAXHandler();
 			saxParser.parse(new File(fileName), handler); 
-		}
 
 			File fXmlFile = new File("C:/Users/Cavaco/IdeaProjects/ProjPOO2019/out/production/ProjPOO2019/data1.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
