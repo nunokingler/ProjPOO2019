@@ -1,3 +1,5 @@
-public interface Event {
-    float time = 0;
+public interface Event{
+
+    void doEvent();
+    float getTime();
 }

@@ -2,21 +2,22 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
 
-public class Ant {
+public class Ant implements Event{
     private Node current_node;
     private ArrayList<Node> path;
-    private float alpha, beta;
+    private float alpha, beta, time_for_next_move;
 
     public Ant(Node current_node,float al,float bt) {
         this.current_node = current_node;
-        path=new ArrayList<Node>();
+        path=new ArrayList<>();
         alpha=al;
         beta=bt;
+        time_for_next_move=0;
     }
 
-    public int next(ArrayList<Node> Path, Node previNode)  {
+    public int next( Node previNode)  {
         int nextNode=0;
-        if(Path.get(0).getID()==current_node.getID()){
+        if(path.get(0).getID()==current_node.getID()){
             //TODO meter ferormonas nessa cena
         }
 //        if(path.get(path.size()-1)==this)
@@ -26,18 +27,17 @@ public class Ant {
             Node temp= path.get(path.size()-1);
             path.remove(temp);
             current_node=path.get(path.size()-1);
-            return this.next(path,temp);
+            return this.next(temp);
             //Path.get(Path.size()-1).next(Path,temp);
         }
         else{//EVERYTHING IS GOOD, calc probability and add node to chain
             ArrayList<Node> arr= new ArrayList<Node>();
-            arr.add(Path.get(Path.size()-1));
+            arr.add(path.get(path.size()-1));
             if(previNode!=null)
                 arr.add(previNode);
             path.add(current_node);
             return Ant.calc_probs(current_node,arr);
         }
-        return -1;
     }
 
     private static int calc_probs(Node s, ArrayList<Node> to_avoid){
@@ -84,6 +84,16 @@ public class Ant {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void doEvent() {
+        next(null);
+    }
+
+    @Override
+    public float getTime() {
+        return time_for_next_move;
     }
 
 }
