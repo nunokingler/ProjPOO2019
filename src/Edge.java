@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Edge implements EventHolder{
 
 	private float weight;
@@ -25,7 +23,13 @@ public class Edge implements EventHolder{
 	}
 
     public void evaporate(float evaporationCoeficient) {
-	    pheromoneLevel-=1;//TODO EVAPORATION FORUMLA
+	    float next_pheromone = pheromoneLevel-evaporationCoeficient;//TODO EVAPORATION FORUMLA
+	    if(next_pheromone>0){
+	    	pheromoneLevel=next_pheromone;
+		}
+	    else{
+	    	pheromoneLevel=0;
+		}
     }
 
     public float getWeight() {

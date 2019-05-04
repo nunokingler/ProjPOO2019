@@ -1,4 +1,3 @@
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
@@ -6,24 +5,24 @@ import java.util.Random;
 public class Ant implements EventHolder{
     private Node current_node;
     private ArrayList<Node> path;
-    private float alpha, beta;
+   // private float alpha, beta;
+    private AntColony colony;
     private AntMoveEvent event;
 
-    public Ant(Node current_node, float al, float bt,float sig, PEC eventManager) {
+    public Ant(AntColony colony,Node current_node,float sig) {
         this.current_node = current_node;
         path=new ArrayList<>();
         path.add(current_node);
-        alpha=al;
-        beta=bt;
-        event = new AntMoveEvent(this,sig,eventManager);
+        this.colony=colony;
+       // alpha=al;
+       // beta=bt;
+        this.colony=colony;
+        event = new AntMoveEvent(this,sig);
     }
-
+/*
     public double next( Node previNode)  {
         int nextNode=0;
         float travel_time;
-        if(path.get(0).getID()==current_node.getID()){
-            //TODO meter ferormonas nessa cena
-        }
         try {
             if (current_node.getEdgeNmbr() == 1 || (current_node.getEdgeNmbr() == 2 && previNode != null)) {//We are or came from a no way out path
                 Node temp = path.get(path.size() - 1);
@@ -47,7 +46,45 @@ public class Ant implements EventHolder{
         }catch (NotThisEdge_exeption notThisEdge_exeption) {
             notThisEdge_exeption.printStackTrace();
         }
+        if(path.get(0).getID()==current_node.getID()){
+            if(colony.isHamiltonian(path.listIterator())){
+                //TODO meter ferormonas nessa cena
+                path=new ArrayList<>();
+                path.add(current_node);
+            }
+            else
+        }
         return 0;
+    }*/
+    public float nextHop(){
+        ListIterator<Edge> edges = current_node.getEdges();
+        boolean hasUnvisitedNodes= false;
+        try{
+            while(edges.hasNext()){
+                Edge next = edges.next();
+                if(!path.contains(next.otherNode(current_node))){
+                    hasUnvisitedNodes=true;
+                    break;
+                }
+            }
+            Node previNode=current_node;
+            if(hasUnvisitedNodes){
+                current_node= calc_probs(current_node,path);
+                path.add(current_node);
+            }
+            else{
+                current_node= calc_probs(current_node,new ArrayList<Node>());
+                int index= path.indexOf(current_node);
+                for(int i= index+1;i<path.size()-1;i++){
+                    path.remove(i);
+                }
+            }
+            Edge edge_used= current_node.getEdgeTo(previNode);
+            return travelTime(edge_used);
+        }catch (NotThisEdge_exeption ex){
+            ex.printStackTrace();
+        }
+         return -1;
     }
 
     private float travelTime(Edge travel_back_edge) {

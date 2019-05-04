@@ -11,6 +11,11 @@ public class PEC {
     public PEC() {
         this.events = new ArrayList<>() ;
     }
+    public Event nextEvent(){
+        Event ev= events.get(0);
+        events.remove(ev);
+        return ev;
+    }
     public void addEvent(Event ev){
         events.add(ev);
         events.sort(Comparator.comparingDouble(Event::getTime));

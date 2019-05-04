@@ -18,6 +18,7 @@ public class Graph {
 		this.nestnode=nest;
 		this.nodes= new HashMap<>();
 		this.edges= new HashMap<>();
+
 	}
 	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMissmatchExeption, DiferentWeightExeption {
 		if(nodes.containsKey(nodeNmbr))
@@ -61,4 +62,10 @@ public class Graph {
 		nodes.put(nodeNmbr,to_add);
 	}
 
+	public Node getNode(int starting_node) {
+		return nodes.get(starting_node);
+	}
+	public int getNodeNumber(){
+		return nodes.size();
+	}
 }

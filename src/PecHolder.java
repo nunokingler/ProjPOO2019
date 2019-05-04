@@ -1,3 +1,3 @@
-public class PecHolder {
-    public static PEC pec= new PEC();
+public interface PecHolder {
+    PEC pec= new PEC();
 }
