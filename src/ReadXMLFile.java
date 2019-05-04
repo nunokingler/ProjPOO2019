@@ -14,12 +14,12 @@ public class ReadXMLFile {
 	
 	static String fileName;
 	
-	//static File xmlFile = new File ("Users/henri/git/ProjPOO2019/bin/data1.xml");
+	static File xmlFile = new File ("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
 	
 	//fileName = xmlFile.getName();
 	
 		public static void main(String argv[]) throws Exception{
-			File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/bin/data1.xml");
+			//File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
 			fileName=xmlFile.getName();
 			
 			try {
