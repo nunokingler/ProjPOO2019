@@ -1,6 +1,7 @@
 //contains nodes
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,8 +11,9 @@ public class Graph {
 	private int nestnode;
 	private HashMap<Integer,Node> nodes;
 	private HashMap<String,Edge> edges;
+	private float n,p;
 
-	Graph(int nodes, int nest){
+	Graph(int nodes, int nest,float n, float p){
 		this.nbnodes=nodes;
 		this.nestnode=nest;
 		this.nodes= new HashMap<>();
@@ -37,8 +39,8 @@ public class Graph {
 				other_node = nodes.get(other_node_nmbr);
 			}
 			sum= other_node_nmbr>nodeNmbr? Integer.toString(nodeNmbr )+'|'+Integer.toString(other_node_nmbr): Integer.toString(other_node_nmbr)+'|'+Integer.toString(nodeNmbr);
-			int node1 = other_node_nmbr>nodeNmbr?nodeNmbr:other_node_nmbr,node2 = node1==nodeNmbr?other_node_nmbr:nodeNmbr;
-			Edge edge_to_add = new Edge(weight,0,node1,node2);
+			Node node1 = other_node.getID()>to_add.getID()?to_add:other_node,node2 = node1==to_add?other_node:to_add;
+			Edge edge_to_add = new Edge(weight,n,p,node1,node2);
 
 			if(!this.edges.containsKey(sum)){
 				//nodes.get(nodeNmbr).addEdge(edge_to_add);

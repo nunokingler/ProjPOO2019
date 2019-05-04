@@ -173,10 +173,18 @@ public class Node {
 	}
 	public float hasEdge(int other_nodeNmbr) throws NotThisEdge_exeption {
 		for(int i =0;i<edges.size();i++){
-			if(this.edges.get(i).otherNode(this)==other_nodeNmbr)
+			if(this.edges.get(i).otherNode(this).getID()==other_nodeNmbr)
 				return this.edges.get(i).getWeight();
 		}
 		return -1;
 
+	}
+
+	public Edge getEdgeTo(Node node) throws NotThisEdge_exeption {
+		for(int i =0;i<edges.size();i++){
+			if(this.edges.get(i).otherNode(this).getID()==node.getID())
+				return this.edges.get(i);
+		}
+		return null;
 	}
 }

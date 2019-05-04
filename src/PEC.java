@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.SortedSet;
+import java.util.*;
 
 /**
  * Created by Cavaco on 28-Apr-19.
@@ -9,36 +6,18 @@ import java.util.SortedSet;
 public class PEC {
 
     private ArrayList<Event> events;
-    private float maxTime;
-    private int steps;
+    static Random random = new Random();
 
-    public PEC(float maxTime,int steps) {
+    public PEC() {
         this.events = new ArrayList<>() ;
-        this.maxTime=maxTime;
-        this.steps=steps;
     }
     public void addEvent(Event ev){
         events.add(ev);
-        events.sort((p1, p2) -> Float.compare(p1.getTime(),p2.getTime()));
-    }
-    public void doEvents(){
-        Event ev=events.get(0);
-        events.remove(ev);
-        float time=ev.getTime(),timePerStep=maxTime/steps;
-        int stepCounter=0;
-        while (time<maxTime) {
-            ev.doEvent();
-            if(time>stepCounter*timePerStep){
-                stepCounter++;
-                doStatistics();
-            }
-            ev = events.get(0);
-            time=ev.getTime();
-        }
-        doStatistics();
+        events.sort(Comparator.comparingDouble(Event::getTime));
     }
 
-    private void doStatistics() {
-
+    public static double expRandom(double m) {
+        double next = random.nextDouble();
+        return -m*Math.log(1.0-next);
     }
 }

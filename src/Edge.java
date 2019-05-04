@@ -1,27 +1,34 @@
 import java.util.Objects;
 
-public class Edge {
+public class Edge implements EventHolder{
 
 	private float weight;
 	private float pheromoneLevel;
 	private float evaporation;
-	private int node1,node2;
+	private Node node1,node2;
+	private EvaporationEvent event;
 
 	public Edge(Edge e) {
 		this.weight=e.weight;
 		this.evaporation=e.evaporation;
 		this.node1=e.node1;
 		this.node2=e.node2;
+		this.event = e.event;
 	}
 
-	public Edge(float weight, float evaporation, int node1, int node2) {
+	public Edge(float weight, float evaporationTime,float evaporationValue, Node node1, Node node2) {
 		this.weight = weight;
 		this.evaporation = evaporation;
 		this.node1 = node1;
 		this.node2 = node2;
+		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);
 	}
 
-	public float getWeight() {
+    public void evaporate(float evaporationCoeficient) {
+	    pheromoneLevel-=1;//TODO EVAPORATION FORUMLA
+    }
+
+    public float getWeight() {
 		return weight;
 	}
 
@@ -29,11 +36,11 @@ public class Edge {
 		return pheromoneLevel;
 	}
 
-	public int otherNode(Node N)throws NotThisEdge_exeption{
-		if(N.getID()==node1){
+	public Node otherNode(Node N)throws NotThisEdge_exeption{
+		if(N.getID()==node1.getID()){
 			return node2;
 		}
-		else if(N.getID()==node2){
+		else if(N.getID()==node2.getID()){
 			return node1;
 		}
 		throw new NotThisEdge_exeption("This edge does not connect to that node",this,N.getID());
@@ -50,6 +57,11 @@ public class Edge {
 
 	@Override
 	public int hashCode() {
-		return node1 + node2;//Objects.hash(node1, node2);
+		return node1.getID() + node2.getID();//Objects.hash(node1, node2);
 	}
+
+    @Override
+    public Event getEvent() {
+        return event;
+    }
 }
