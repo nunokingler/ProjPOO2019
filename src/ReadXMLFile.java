@@ -1,5 +1,5 @@
 import javax.xml.parsers.*;
-import org.xml.sax.*;
+//import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
 import org.w3c.dom.Document;
@@ -8,32 +8,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 import java.io.*;
-import java.util.*;
+//import java.util.*;
 
 public class ReadXMLFile {
 	
 	static String fileName;
 	
-	static File xmlFile = new File ("Users/henri/git/ProjPOO2019/bin/data1.xml");
+	//static File xmlFile = new File ("Users/henri/git/ProjPOO2019/bin/data1.xml");
 	
-		public void startDocument() {
-			System.out.println("Parsing of " + fileName);
-		}
+	//fileName = xmlFile.getName();
 	
-		public void endDocument() {
-			System.out.println("Parsing concluded");	
-		}
-	
-		public void startElement(String uri, String name, String tag, Attributes atts) {
-			System.out.print("Element <" + tag + "> ");	
-		}
-	
-		public void characters(char[]ch,int start,int length){
-			System.out.print(new String(ch,start,length));
-		}
-
 		public static void main(String argv[]) throws Exception{
+			File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/bin/data1.xml");
 			fileName=xmlFile.getName();
+			
 			try {
 			SAXParserFactory fact = SAXParserFactory.newInstance();
 			SAXParser saxParser = fact.newSAXParser();
@@ -42,10 +30,9 @@ public class ReadXMLFile {
 			DefaultHandler handler = new SAXHandler();
 			saxParser.parse(new File(fileName), handler); 
 
-			File fXmlFile = new File("C:/Users/Cavaco/IdeaProjects/ProjPOO2019/out/production/ProjPOO2019/data1.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            Document doc = dBuilder.parse(xmlFile);
 
             //optional, but recommended
             //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
