@@ -14,12 +14,12 @@ public class ReadXMLFile {
 	
 	static String fileName;
 	
-	static File xmlFile = new File ("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
+	//static File xmlFile = new File ("C:/Users/henri/git/ProjPOO2019/data1.xml");
 	
 	//fileName = xmlFile.getName();
 	
 		public static void main(String argv[]) throws Exception{
-			//File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
+			File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/data1.xml");
 			fileName=xmlFile.getName();
 			
 			try {
@@ -47,10 +47,12 @@ public class ReadXMLFile {
 
             System.out.println("----------------------------");
 
-            Node nNode1 = nList1.item(temp1);
+         /*   Node nNode1 = nList1.item(temp1);
 
-                System.out.println("\nCurrent Element : " + nNode1.getNodeName());
-
+            System.out.println("\nCurrent Element : " + nNode1.getNodeName());
+        
+            for (temp1 = 0; temp1 < nList1.getLength(); temp1++) {
+                	
                 if (nNode1.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element eElement = (Element) nNode1;
@@ -65,13 +67,11 @@ public class ReadXMLFile {
                     	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
 
                     		eElement = (Element) nNode2;
-                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode"));
-
-
-                    	 //System.out.println("TargetNode : " + eElement.getElementsByTagName("targetnode").item(0).getTextContent());
+                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode") + " Weight: " + eElement.getAttribute("weight") );
 
                     }
-            }
+                }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }
