@@ -8,10 +8,10 @@ import java.util.List;
 public class SAXHandler extends DefaultHandler{
 
     private String currentValue=null;
-    private List<Node> nodes = null;
-    private Node node1, node2 = null;
-    private List<Edge> edges = null; 
-    private Edge edge = null;
+    private List<Integer> nodes = null;
+    private int node1, node2;
+    private List<Float> edges = null; 
+    private float edge;
     
     private float evap1;
     private float evap2;
@@ -26,8 +26,8 @@ public class SAXHandler extends DefaultHandler{
     public void startDocument() throws SAXException {
     	
     	System.out.println("Beginning the parsing of " + fileName); 
-        nodes = new ArrayList<Node>();
-        edges = new ArrayList<Edge>();
+        nodes = new ArrayList<Integer>();
+        edges = new ArrayList<Float>();
 
     }
     
@@ -67,10 +67,10 @@ public class SAXHandler extends DefaultHandler{
     			
     			String id_node = attributes.getValue("nodeidx");
     			
-    			//node1=Integer.valueOf(id_node);
+    			node1=Integer.valueOf(id_node);
     			
                 System.out.println("Node ID: " + Integer.valueOf(id_node));
-                node1 = new Node(Integer.valueOf(id_node));
+               // node1 = new Node(Integer.valueOf(id_node));
 				nodes.add(node1);
 
       		}
@@ -81,7 +81,7 @@ public class SAXHandler extends DefaultHandler{
         		 
         		 String t_node = attributes.getValue("targetnode");
         		// node2=Integer.valueOf(t_node);
-        		 node2 = new Node(Integer.valueOf(t_node));
+        		// node2 = new Node(Integer.valueOf(t_node));
         		 
         		 System.out.print("Target node: " + Integer.valueOf(t_node));
         	}
@@ -119,24 +119,25 @@ public class SAXHandler extends DefaultHandler{
 		
 		   case "weight":      float peso = Float.valueOf(currentValue);
            					   System.out.print(" Peso: " + peso + "\n");
-		   					   edge = new Edge(peso,evap1, evap2, node1,node2);
+		   					   //edge = new Edge(peso,evap1, evap2, node1,node2);
 		   					  
-		   					   edges.add(edge);
+		   					   edges.add(peso);
 		   					   
 		                       break;
 		                       
 		}
 	}
 	
-	  public List<Node> getNodes() {
+	  public List<Integer> getNodes() {
 	        return nodes;
 	    }
 
-	  public List<Edge> getEdges() {
+	  public List<Float> getEdges() {
 	        return edges;
 	    }
 	
 	public void endDocument(){
+	
 		 System.out.println("Parsing concluded");
 		} 
 }
