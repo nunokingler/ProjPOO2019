@@ -4,7 +4,9 @@ public class  Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         PEC pec = PecHolder.pec;
-        
+
+        //Instancia as coisas aqui
+
         Event ev=pec.nextEvent();
         double time= ev.getTime();
         float simTime=20;
