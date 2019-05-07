@@ -4,14 +4,13 @@ public class EvaporationEvent implements Event{
     private double timeForNextEvaporation;
     private Edge edge;
     private PEC pec;
-    private int nmbr_of_evaps;
+    private static int nmbr_of_evaps=0;
     public EvaporationEvent(Edge edge, float evaporationTime,float evaporationValue) {
         this.edge= edge;
         n=evaporationTime;
         p=evaporationValue;
         timeForNextEvaporation=0;
         pec=PecHolder.pec;
-        nmbr_of_evaps=0;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class EvaporationEvent implements Event{
         return timeForNextEvaporation;
     }
 
-    public int getNmbr_of_moves() {
+    public static int getNmbr_of_moves() {
         return nmbr_of_evaps;
     }
 }

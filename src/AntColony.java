@@ -77,11 +77,11 @@ public class AntColony {
    		String to_send="";
 		for(int i = 0; i< hamiltonians.size(); i++){
 			ArrayList<Node> path= hamiltonians.get(i);
-			to_send+='[';
+			to_send+='{';
 			for(int j=0;j<path.size();j++){
 				to_send+=","+path.get(j).getID()+",";
 			}
-			to_send+=']';
+			to_send+='}';
 		}
 		return to_send;
 	}

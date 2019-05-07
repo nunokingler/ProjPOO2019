@@ -4,7 +4,7 @@ public class AntMoveEvent implements Event {
     private double time_for_next_move;
     private Ant ant;
     private PEC pec;
-    private static int  nmbr_of_moves;
+    private static int  nmbr_of_moves=0;
     public AntMoveEvent(Ant ant,float sig) {
         sigma=sig;
         this.ant=ant;
@@ -12,7 +12,6 @@ public class AntMoveEvent implements Event {
         pec.addEvent(this);
         time_for_next_move=0;
         pec.addEvent(this);
-        nmbr_of_moves=0;
     }
 
     @Override
