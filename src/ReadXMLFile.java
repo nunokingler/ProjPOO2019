@@ -28,7 +28,7 @@ public class ReadXMLFile {
             SAXParser saxParser = fact.newSAXParser();
 
             // parse the XML document with this handler
-            DefaultHandler handler = new SAXHandler();
+            SAXHandler handler = new SAXHandler();
             saxParser.parse(new File(fileName), handler);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -39,14 +39,21 @@ public class ReadXMLFile {
             //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
 
-            int temp1=0;
-            int temp2=0;
-
             System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 
-            NodeList nList1 = doc.getElementsByTagName("node");
+            // NodeList nList1 = doc.getElementsByTagName("node");
+
+            ArrayList<Integer> IntParameters = handler.getParamInt();
+            ArrayList<Float> FloatParameters = handler.getParamFloat();
+
+            List<Integer> Nodes = handler.getNodes();
+            List<Integer> Target_nodes = handler.getTargetNode();
+            List<Float> Edges = handler.getEdges();
+
 
             System.out.println("----------------------------");
+
+
 
          /*   Node nNode1 = nList1.item(temp1);
             System.out.println("\nCurrent Element : " + nNode1.getNodeName());

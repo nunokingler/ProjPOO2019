@@ -18,7 +18,9 @@ public class Graph {
 		this.n=n;
 		this.p=p;
 	}
+
 	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMismatchException, DiferentWeightExeption {
+
 		if(nodes.containsKey(nodeNmbr))
 			throw new DuplicatesExeption("This node was already created!");
 		if(connections_other__node.size()!= connections_weight.size())

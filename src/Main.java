@@ -4,12 +4,15 @@ public class  Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         PEC pec = PecHolder.pec;
-
-        Simulation s = new Simulation(20,0,0,50,1);
-
+       // Simulation s = new Simulation(20,0,0,50,1);
 
         //Instancia as coisas aqui
         //s.addNode();
+
+        ReadXMLFile read = new ReadXMLFile();
+
+
+        //Simulation simul = new Simulation(f_inst, evap1, evap2, ant_colsize, nest_node);
 
         try {
             Event ev = pec.nextEvent();

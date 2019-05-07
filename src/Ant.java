@@ -3,9 +3,10 @@ import java.util.ListIterator;
 import java.util.Random;
 
 public class Ant implements EventHolder{
+	
     private Node current_node;
     private ArrayList<Node> path;
-   // private float alpha, beta;
+ // private float alpha, beta;
     private AntColony colony;
     private AntMoveEvent event;
 

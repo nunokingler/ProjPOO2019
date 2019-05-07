@@ -6,8 +6,7 @@ public class Simulation {
     private int antcolsize;
     private AntColony antColony;
     private Graph graph;
-
-
+    
 
 	public Simulation(float finalinst, float p, float n, int antcolsize, int nestNode) {
 		//super();
