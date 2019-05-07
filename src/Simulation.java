@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Simulation {
 
 	private float finalinst,plevel;
@@ -17,6 +19,11 @@ public class Simulation {
 	}
 
 
-
+	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMissmatchExeption {
+		graph.addNode(nodeNmbr,weights,connections);
+	}
+	public String getAntColonyString(){
+		return antColony.toString();
+	}
 
 }
