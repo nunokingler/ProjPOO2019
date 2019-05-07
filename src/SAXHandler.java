@@ -22,6 +22,10 @@ public class SAXHandler extends DefaultHandler{
 	private float f_inst;
 	private float phe_level;
 	private int ant_colsize;
+	
+	float alpha;
+	float beta;
+	float delta;
     
    // private float node1;
    // private float node2;
@@ -107,9 +111,9 @@ public class SAXHandler extends DefaultHandler{
     			String in_alpha = attributes.getValue("alpha");
     			String in_beta = attributes.getValue("beta");
     			String in_delta = attributes.getValue("delta");
-    			float alpha=Float.valueOf(in_alpha);
-    			float beta=Float.valueOf(in_beta);
-    			float delta=Float.valueOf(in_delta);
+    			alpha=Float.valueOf(in_alpha);
+    			beta=Float.valueOf(in_beta);
+    			delta=Float.valueOf(in_delta);
     			
                 System.out.println("Alpha: " + alpha  + " Beta: " + beta + " Delta: " + delta);
     		}
@@ -154,8 +158,7 @@ public class SAXHandler extends DefaultHandler{
 	        return edges;
 	    }
 	  
-	  Simulation simul = new Simulation(f_inst, phe_level, ant_colsize);
-	  Graph graph = new Graph(nb_nodes, nest_node, evap1, evap2);
+	  Simulation simul = new Simulation(f_inst, alpha, beta, delta, evap1, evap2, ant_colsize, nest_node);
 	  
 	public void endDocument(){
 	

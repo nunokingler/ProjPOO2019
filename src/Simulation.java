@@ -7,7 +7,7 @@ public class Simulation {
 
 
 
-	public Simulation(float finalinst,float alpha, float beta, float delta, float p, float n, int antcolsize, int nestNode) {
+	public Simulation(float finalinst,float alpha, float beta, float delta, float n, float p, int antcolsize, int nestNode) {
 		//super();
 		this.finalinst = finalinst;
 		this.plevel = p;
