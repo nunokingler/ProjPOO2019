@@ -10,11 +10,11 @@ public class AntColony {
 	private float alpha;
 	private float beta;
 	private float delta;
+	private float gamma;
 
 
 	AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
-		//antsnumber=1;
 		ants= new ArrayList<>();
 		for(int i=0;i<_Antsnumber;i++){
 			ants.add(new Ant(this,starting_node, delta));
@@ -37,6 +37,10 @@ public class AntColony {
 
 	public void setDelta(float delta) {
 		this.delta = delta;
+	}
+
+	public void setGamma(float gamma) {
+		this.gamma = gamma;
 	}
 
 	public void antFirstMove(){
@@ -62,10 +66,19 @@ public class AntColony {
 		}
    		ArrayList<Node> completeCicle= new ArrayList<>();
    		completeCicle.add(next);
-   		while(path.hasPrevious()){
-   			next=path.previous();
-   			completeCicle.add(0,next);
+   		Node previNode=next;
+		float totalWeight=0;
+		try {
+			while (path.hasPrevious()) {
+				next = path.previous();
+				totalWeight += next.getEdgeToWeight(previNode.getID());
+				completeCicle.add(0, next);
+				previNode = next;
+			}
+		}catch (NotThisEdge_exeption ex){
+			ex.printStackTrace();
 		}
+   		graph.addPheromones( completeCicle.listIterator(), gamma/totalWeight);
    		//hamiltonians.add(new ArrayList<>((Collection<Node>) path)); //TODO check if this works
 		return true;
 	}
@@ -98,4 +111,10 @@ public class AntColony {
 	public float getDelta() {
 		return delta;
 	}
+
+	public float getGamma() {
+		return gamma;
+	}
+
+
 }

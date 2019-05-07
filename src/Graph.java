@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ListIterator;
 
 public class Graph {
 
@@ -17,11 +18,11 @@ public class Graph {
 		this.n=n;
 		this.p=p;
 	}
-	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMissmatchExeption, DiferentWeightExeption {
+	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMismatchException, DiferentWeightExeption {
 		if(nodes.containsKey(nodeNmbr))
 			throw new DuplicatesExeption("This node was already created!");
 		if(connections_other__node.size()!= connections_weight.size())
-			throw new SizeMissmatchExeption("Connections weight and other node are diferent sizes");
+			throw new SizeMismatchException("Connections weight and other node are diferent sizes");
 
 		String sum;
 		Node to_add= new Node(nodeNmbr),other_node;
@@ -43,7 +44,7 @@ public class Graph {
 			if(!this.edges.containsKey(sum)){
 				//nodes.get(nodeNmbr).addEdge(edge_to_add);
 				try {
-					if(other_node.hasEdge(nodeNmbr)!=weight){
+					if(other_node.getEdgeToWeight(nodeNmbr)!=weight){
 						throw new DiferentWeightExeption("This node already has 1 edge with diferent weight");
 					}
 				}
@@ -62,7 +63,25 @@ public class Graph {
 	public Node getNode(int starting_node) {
 		return nodes.get(starting_node);
 	}
+
 	public int getNodeNumber(){
 		return nodes.size();
+	}
+
+	public void addPheromones(ListIterator<Node> listIterator,float valueToAdd) {
+		Node node = null,previNode;
+		Edge edge = null;
+		if(listIterator.hasNext())
+			node=listIterator.next();
+		while(listIterator.hasNext()){
+			previNode=node;
+			node=listIterator.next();
+			try {
+				edge=previNode.getEdgeTo(node);
+			} catch (NotThisEdge_exeption notThisEdge_exeption) {
+				notThisEdge_exeption.printStackTrace();
+			}
+			edge.addPheromones(edge.getWeight()*valueToAdd);
+		}
 	}
 }

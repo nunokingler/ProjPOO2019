@@ -30,7 +30,7 @@ public class Simulation {
 		antColony.setDelta(delta);
 	}
 
-	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMissmatchExeption {
+	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMismatchException {
 		graph.addNode(nodeNmbr,weights,connections);
 	}
 

@@ -70,4 +70,8 @@ public class Edge implements EventHolder{
     public Event getEvent() {
         return event;
     }
+
+	public void addPheromones(float value_to_add) {
+		pheromoneLevel+=value_to_add;
+	}
 }
