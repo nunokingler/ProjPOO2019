@@ -44,7 +44,7 @@ public class Ant implements EventHolder{
                 }
             }
             Edge edge_used= current_node.getEdgeTo(previNode);
-            return travelTime(edge_used,colony.getSigma());
+            return travelTime(edge_used,colony.getDelta());
         }catch (NotThisEdge_exeption ex){
             ex.printStackTrace();
         }

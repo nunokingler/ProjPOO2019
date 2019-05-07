@@ -9,7 +9,7 @@ public class AntColony {
 	private Graph graph;
 	private float alpha;
 	private float beta;
-	private float sigma;
+	private float delta;
 
 
 	AntColony(int _Antsnumber, Graph graph, int Starting_node){
@@ -17,7 +17,7 @@ public class AntColony {
 		//antsnumber=1;
 		ants= new ArrayList<>();
 		for(int i=0;i<_Antsnumber;i++){
-			ants.add(new Ant(this,starting_node,sigma));
+			ants.add(new Ant(this,starting_node, delta));
 		}
 		antsnumber=_Antsnumber;
 		this.graph=graph;
@@ -25,7 +25,7 @@ public class AntColony {
 		hamiltonians =new ArrayList<>();
 		alpha=0;
 		beta=0;
-		sigma=0;
+		delta =0;
 	}
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
@@ -35,8 +35,8 @@ public class AntColony {
 		this.beta = beta;
 	}
 
-	public void setSigma(float sigma) {
-		this.sigma = sigma;
+	public void setDelta(float delta) {
+		this.delta = delta;
 	}
 
 	public void antFirstMove(){
@@ -95,7 +95,7 @@ public class AntColony {
 		return beta;
 	}
 
-	public float getSigma() {
-		return sigma;
+	public float getDelta() {
+		return delta;
 	}
 }

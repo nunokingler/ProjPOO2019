@@ -16,7 +16,6 @@ public class Graph {
 		this.edges= new HashMap<>();
 		this.n=n;
 		this.p=p;
-
 	}
 	
 	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMissmatchExeption, DiferentWeightExeption {
