@@ -59,6 +59,23 @@ public class Graph {
 		}
 		nodes.put(nodeNmbr,to_add);
 	}
+	public void addEdge(int node1,int node2, float weight) throws NotThisEdge_exeption, ThisEdgeAlreadyExists {
+		if(!nodes.containsKey(node1))
+			nodes.put(node1, new Node(node1));
+		if(!nodes.containsKey(node2))
+			nodes.put(node2, new Node(node2));
+
+		if(nodes.get(node1).hasEdge(node2)){
+			throw new ThisEdgeAlreadyExists();
+		}
+
+		Edge to_add = new Edge(weight,n,p,nodes.get(node1),nodes.get(node2));
+		nodes.get(node1).addEdge(to_add);
+		nodes.get(node2).addEdge(to_add);
+		String sum= node2>node1? Integer.toString(node1 )+'|'+Integer.toString(node2): Integer.toString(node2)+'|'+Integer.toString(node1);
+
+		edges.put(sum,to_add);
+	}
 
 	public Node getNode(int starting_node) {
 		return nodes.get(starting_node);

@@ -19,7 +19,7 @@ public class ReadXMLFile {
 
     //fileName = xmlFile.getName();
 
-    public static void main(String argv[]) throws Exception{
+    public static void main(String argv[]){
         File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/data1.xml");
         fileName=xmlFile.getName();
 

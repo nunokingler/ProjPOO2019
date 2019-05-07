@@ -33,6 +33,9 @@ public class Simulation {
 	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMismatchException {
 		graph.addNode(nodeNmbr,weights,connections);
 	}
+	public void addEdge(int node1, int node2, float weight) throws NotThisEdge_exeption, ThisEdgeAlreadyExists {
+		graph.addEdge(node1,node2,weight);
+	}
 
 	public String getAntColonyString(){
 		return antColony.toString();

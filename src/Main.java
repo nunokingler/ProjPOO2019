@@ -4,7 +4,9 @@ public class  Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         PEC pec = PecHolder.pec;
+
         Simulation s = new Simulation(20,0,0,50,1);
+
 
         //Instancia as coisas aqui
         //s.addNode();
