@@ -25,6 +25,7 @@ public class AntColony {
 		hamiltonians =new ArrayList<>();
 		alpha=0;
 		beta=0;
+		sigma=0;
 	}
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
