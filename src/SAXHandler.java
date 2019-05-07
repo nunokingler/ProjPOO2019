@@ -9,6 +9,8 @@ public class SAXHandler extends DefaultHandler{
 
     private String currentValue=null;
     private List<Integer> nodes = null;
+    private List<Integer> target_nodes = null;
+    
     private int node1, node2;
     private List<Float> edges = null; 
     private float edge;
@@ -109,9 +111,11 @@ public class SAXHandler extends DefaultHandler{
         		 String t_node = attributes.getValue("targetnode");
         		// node2=Integer.valueOf(t_node);
         		// node2 = new Node(Integer.valueOf(t_node));
+        		 int targ_node=Integer.valueOf(t_node);
         		 
         		 System.out.print("Target node: " + Integer.valueOf(t_node));
-        	}
+        		 target_nodes.add(targ_node);
+        	 }
         }
     	else if (qName.equalsIgnoreCase("move")) {
     		if(attributes.getLength() > 0){
@@ -133,6 +137,9 @@ public class SAXHandler extends DefaultHandler{
     			String in_rho = attributes.getValue("rho");
     			evap1=Float.valueOf(in_eta);
     			evap2=Float.valueOf(in_rho);
+    			
+    			parametersFloat.add(evap1);
+    			parametersFloat.add(evap2);
     			
                 System.out.println("Eta: " + evap1 + " Rho: " + evap2);
                 
@@ -158,20 +165,29 @@ public class SAXHandler extends DefaultHandler{
 		}
 	}
 	
+	    
+	
 	  public List<Integer> getNodes() {
 	        return nodes;
 	    }
+	  
+	  public List<Integer> getTargetNode(){
+		  return target_nodes;
+	  }
 
 	  public List<Float> getEdges() {
 	        return edges;
 	    }
 	  
-	  public Integer getParamInt() {
-		  return  
+	  public ArrayList<Float> getParamFloat() {
+		  return parametersFloat;
 	  }
 	  
-	  Simulation simul = new Simulation(f_inst, alpha, beta, delta, evap1, evap2, ant_colsize, nest_node);
-	  
+
+	  public ArrayList<Integer> getParamInt() {
+		  return parametersInt;
+	  }
+	  	  
 	public void endDocument(){
 	
 		 System.out.println("Parsing concluded");

@@ -7,6 +7,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 //import org.xml.sax.*;
 //import java.util.*;
@@ -19,7 +21,7 @@ public class ReadXMLFile {
 
     //fileName = xmlFile.getName();
 
-    public static void main(String argv[]) throws Exception{
+    public static void read_xml(String argv[]) throws Exception{
         File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/data1.xml");
         fileName=xmlFile.getName();
 
@@ -28,7 +30,7 @@ public class ReadXMLFile {
             SAXParser saxParser = fact.newSAXParser();
 
             // parse the XML document with this handler
-            DefaultHandler handler = new SAXHandler();
+            SAXHandler handler = new SAXHandler();
             saxParser.parse(new File(fileName), handler);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -39,13 +41,18 @@ public class ReadXMLFile {
             //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
 
-            int temp1=0;
-            int temp2=0;
-
             System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 
-           // NodeList nList1 = doc.getElementsByTagName("node");
-
+            // NodeList nList1 = doc.getElementsByTagName("node");
+            
+            ArrayList<Integer> IntParameters = handler.getParamInt();
+            ArrayList<Float> FloatParameters = handler.getParamFloat();
+            
+            List<Integer> Nodes = handler.getNodes();
+            List<Integer> Target_nodes = handler.getTargetNode();
+            List<Float> Edges = handler.getEdges();
+            
+            
             System.out.println("----------------------------");
             
            
