@@ -7,6 +7,8 @@ public class  Main {
 
         //Instancia as coisas aqui
 
+        
+        
         try {
             Event ev = pec.nextEvent();
             double time = ev.getTime();
