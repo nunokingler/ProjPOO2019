@@ -14,8 +14,12 @@ public class AntColony {
 
 	AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
-		antsnumber=1;
+		//antsnumber=1;
 		ants= new ArrayList<>();
+		for(int i=0;i<_Antsnumber;i++){
+			ants.add(new Ant(this,starting_node,sigma));
+		}
+		antsnumber=_Antsnumber;
 		this.graph=graph;
 		this.starting_node=graph.getNode(Starting_node);
 		hamiltonians =new ArrayList<>();
