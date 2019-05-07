@@ -22,13 +22,15 @@ public class Edge implements EventHolder{
 		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);
 	}
 
-    public void evaporate(float evaporationCoeficient) {
-	    float next_pheromone = pheromoneLevel-evaporationCoeficient;//TODO EVAPORATION FORUMLA
+    public boolean evaporate(float evaporationValue) {
+	    float next_pheromone = pheromoneLevel-evaporationValue;//TODO EVAPORATION FORUMLA
 	    if(next_pheromone>0){
 	    	pheromoneLevel=next_pheromone;
+	    	return true;
 		}
 	    else{
 	    	pheromoneLevel=0;
+	    	return false;
 		}
     }
 

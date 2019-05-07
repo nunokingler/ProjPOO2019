@@ -20,7 +20,7 @@ public class Ant implements EventHolder{
         event = new AntMoveEvent(this,sig);
     }
 
-    public float nextHop(){
+    public double nextHop(){
         ListIterator<Edge> edges = current_node.getEdges();
         boolean hasUnvisitedNodes= false;
         try{
@@ -33,29 +33,29 @@ public class Ant implements EventHolder{
             }
             Node previNode=current_node;
             if(hasUnvisitedNodes){
-                current_node= calc_probs(current_node,path);
+                current_node= calc_probs(current_node,path,colony.getAlpha(),colony.getBeta());
                 path.add(current_node);
             }
             else{
-                current_node= calc_probs(current_node,new ArrayList<>());
+                current_node= calc_probs(current_node,new ArrayList<>(),colony.getAlpha(),colony.getBeta());
                 int index= path.indexOf(current_node);
                 for(int i= index+1;i<path.size()-1;i++){
                     path.remove(i);
                 }
             }
             Edge edge_used= current_node.getEdgeTo(previNode);
-            return travelTime(edge_used);
+            return travelTime(edge_used,colony.getSigma());
         }catch (NotThisEdge_exeption ex){
             ex.printStackTrace();
         }
          return -1;
     }
 
-    private float travelTime(Edge travel_back_edge) {
-        return travel_back_edge.getWeight();//TODO formula para travel time
+    private double travelTime(Edge travel_back_edge,float sigma) {
+        return PEC.expRandom(travel_back_edge.getWeight()*sigma);//TODO formula para travel time
     }
 
-    private static Node calc_probs(Node s, ArrayList<Node> to_avoid){
+    private static Node calc_probs(Node s, ArrayList<Node> to_avoid,float alpha,float beta){
         int nmbrOfProbs= s.getEdgeNmbr(), counter=0;
         float probs[]=new float[nmbrOfProbs],total=0;
         Node n[]= new Node[nmbrOfProbs];
@@ -79,7 +79,7 @@ public class Ant implements EventHolder{
                 }
             }
             if(is_valid){                                                                                   //IF THIS EDGE IS VALID ADD IT TO THE FORMULA
-                float probability= 1+1;             //TODO FORMULA
+                float probability= (alpha+edg.getPheromoneLevel())/(beta+edg.getWeight());             //TODO FORMULA
                 probs[counter]= probability;
                 try {
                     n[counter]= edg.otherNode(s);
@@ -92,7 +92,7 @@ public class Ant implements EventHolder{
             }
         }
         Random r = new Random();
-        float ticket = r.nextFloat();
+        float ticket = r.nextFloat() * (total);
         for(int i =nmbrOfProbs-1;i>=0;i--){
             if(ticket<probs[i]){
                 return n[i];
