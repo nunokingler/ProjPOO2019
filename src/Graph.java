@@ -7,17 +7,15 @@ import java.util.HashMap;
 
 public class Graph {
 
-	private int nbnodes;
-	private int nestnode;
 	private HashMap<Integer,Node> nodes;
 	private HashMap<String,Edge> edges;
 	private float n,p;
 
-	Graph(int nodes, int nest,float n, float p){
-		this.nbnodes=nodes;
-		this.nestnode=nest;
+	Graph(float n, float p){
 		this.nodes= new HashMap<>();
 		this.edges= new HashMap<>();
+		this.n=n;
+		this.p=p;
 
 	}
 	
