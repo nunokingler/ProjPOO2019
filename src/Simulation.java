@@ -6,8 +6,7 @@ public class Simulation {
     private int antcolsize;
     private AntColony antColony;
     private Graph graph;
-
-
+    
 
 	public Simulation(float finalinst,float alpha, float beta, float delta, float n, float p, int antcolsize, int nestNode) {
 		//super();
@@ -30,7 +29,7 @@ public class Simulation {
 		antColony.setDelta(delta);
 	}
 
-	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMissmatchExeption {
+	public void addNode(int nodeNmbr,ArrayList<Float>weights,ArrayList<Integer> connections) throws DiferentWeightExeption, DuplicatesExeption, SizeMismatchException {
 		graph.addNode(nodeNmbr,weights,connections);
 	}
 

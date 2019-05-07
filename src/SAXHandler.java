@@ -13,6 +13,9 @@ public class SAXHandler extends DefaultHandler{
     private List<Float> edges = null; 
     private float edge;
     
+    private ArrayList<Integer> parametersInt=null;
+    private ArrayList<Float> parametersFloat=null;
+    
     private float evap1;
     private float evap2;
     
@@ -61,6 +64,9 @@ public class SAXHandler extends DefaultHandler{
     			phe_level=Float.valueOf(p_level);
     			ant_colsize=Integer.valueOf(s_antcol);
 
+    			parametersFloat.add(f_inst);
+    			parametersFloat.add(phe_level);
+    			parametersInt.add(ant_colsize);
     			
                 //Simulation simul  = new Simulation(Float.valueOf(f_instant),Float.valueOf(p_level), Integer.valueOf(s_antcol));
                 System.out.println("Final Instant: " + Float.valueOf(f_instant) + " Colony Size: " + Integer.valueOf(s_antcol) + " Pheromone level: " + Float.valueOf(p_level));
@@ -74,6 +80,8 @@ public class SAXHandler extends DefaultHandler{
     			nb_nodes=Integer.valueOf(n_nodes);
     			nest_node=Integer.valueOf(n_nest);
     			
+    			parametersInt.add(nest_node);
+
                 System.out.println("Number of nodes: " + nb_nodes + " Nest node: " + nest_node);
 
     			
@@ -157,6 +165,10 @@ public class SAXHandler extends DefaultHandler{
 	  public List<Float> getEdges() {
 	        return edges;
 	    }
+	  
+	  public Integer getParamInt() {
+		  return  
+	  }
 	  
 	  Simulation simul = new Simulation(f_inst, alpha, beta, delta, evap1, evap2, ant_colsize, nest_node);
 	  

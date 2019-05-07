@@ -8,6 +8,7 @@ public class  Main {
         //Instancia as coisas aqui
 
         
+        ReadXMLFile();
         
         try {
             Event ev = pec.nextEvent();
