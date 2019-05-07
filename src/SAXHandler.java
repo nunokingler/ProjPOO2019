@@ -16,6 +16,13 @@ public class SAXHandler extends DefaultHandler{
     private float evap1;
     private float evap2;
     
+    private int nb_nodes;
+	private int nest_node;
+	
+	private float f_inst;
+	private float phe_level;
+	private int ant_colsize;
+    
    // private float node1;
    // private float node2;
     
@@ -46,6 +53,11 @@ public class SAXHandler extends DefaultHandler{
                 String p_level = attributes.getValue("plevel");
                 String s_antcol = attributes.getValue("antcolsize");
                 
+                f_inst=Float.valueOf(f_instant);
+    			phe_level=Float.valueOf(p_level);
+    			ant_colsize=Integer.valueOf(s_antcol);
+
+    			
                 //Simulation simul  = new Simulation(Float.valueOf(f_instant),Float.valueOf(p_level), Integer.valueOf(s_antcol));
                 System.out.println("Final Instant: " + Float.valueOf(f_instant) + " Colony Size: " + Integer.valueOf(s_antcol) + " Pheromone level: " + Float.valueOf(p_level));
             }    
@@ -55,7 +67,10 @@ public class SAXHandler extends DefaultHandler{
     			String n_nodes = attributes.getValue("nbnodes");
     			String n_nest = attributes.getValue("nestnode");
     			
-                System.out.println("Number of nodes: " + Integer.valueOf(n_nodes) + " Nest node: " + Integer.valueOf(n_nest));
+    			nb_nodes=Integer.valueOf(n_nodes);
+    			nest_node=Integer.valueOf(n_nest);
+    			
+                System.out.println("Number of nodes: " + nb_nodes + " Nest node: " + nest_node);
 
     			
                 //Graph graph = new Graph(Integer.valueOf(n_nodes),Integer.valueOf(n_nest), Float.valueOf(in_eta), Float.valueOf(in_rho));
@@ -92,8 +107,11 @@ public class SAXHandler extends DefaultHandler{
     			String in_alpha = attributes.getValue("alpha");
     			String in_beta = attributes.getValue("beta");
     			String in_delta = attributes.getValue("delta");
+    			float alpha=Float.valueOf(in_alpha);
+    			float beta=Float.valueOf(in_beta);
+    			float delta=Float.valueOf(in_delta);
     			
-                System.out.println("Alpha: " + Float.valueOf(in_alpha)  + " Beta: " + Float.valueOf(in_beta) + " Delta: " + Float.valueOf(in_delta));
+                System.out.println("Alpha: " + alpha  + " Beta: " + beta + " Delta: " + delta);
     		}
     	}
     	else if (qName.equalsIgnoreCase("evaporation")) {
@@ -135,7 +153,10 @@ public class SAXHandler extends DefaultHandler{
 	  public List<Float> getEdges() {
 	        return edges;
 	    }
-	
+	  
+	  Simulation simul = new Simulation(f_inst, phe_level, ant_colsize);
+	  Graph graph = new Graph(nb_nodes, nest_node, evap1, evap2);
+	  
 	public void endDocument(){
 	
 		 System.out.println("Parsing concluded");

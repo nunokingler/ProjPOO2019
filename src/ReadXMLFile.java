@@ -43,10 +43,12 @@ public class ReadXMLFile {
 
             System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
 
-            NodeList nList1 = doc.getElementsByTagName("node");
+           // NodeList nList1 = doc.getElementsByTagName("node");
 
             System.out.println("----------------------------");
-
+            
+           
+            
          /*   Node nNode1 = nList1.item(temp1);
 
             System.out.println("\nCurrent Element : " + nNode1.getNodeName());

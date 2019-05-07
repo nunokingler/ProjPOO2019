@@ -20,6 +20,7 @@ public class Graph {
 		this.edges= new HashMap<>();
 
 	}
+	
 	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMissmatchExeption, DiferentWeightExeption {
 		if(nodes.containsKey(nodeNmbr))
 			throw new DuplicatesExeption("This node was already created!");

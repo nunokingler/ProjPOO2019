@@ -5,6 +5,7 @@ public class AntMoveEvent implements Event {
     private Ant ant;
     private PEC pec;
     private static int  nmbr_of_moves=0;
+    
     public AntMoveEvent(Ant ant,float sig) {
         sigma=sig;
         this.ant=ant;
