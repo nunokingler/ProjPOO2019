@@ -97,10 +97,11 @@ public class Graph {
 			node=listIterator.next();
 			try {
 				edge=previNode.getEdgeTo(node);
+				edge=previNode.getEdgeTo(node);
+				edge.addPheromones(edge.getWeight()*valueToAdd);
 			} catch (NotThisEdge_exeption notThisEdge_exeption) {
 				notThisEdge_exeption.printStackTrace();
 			}
-			edge.addPheromones(edge.getWeight()*valueToAdd);
 		}
 	}
 }

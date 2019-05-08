@@ -19,6 +19,7 @@ public class Observation implements Event{
         System.out.println("    Number of evaporation events:   "+EvaporationEvent.getNmbr_of_moves());
         System.out.println("    Hamiltonian cycle:              "+colony.toString());
         time+=maxTime/steps;
+        observation++;
         PecHolder.pec.addEvent(this);
     }
 

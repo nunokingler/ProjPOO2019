@@ -22,6 +22,7 @@ public class Ant implements EventHolder{
     }
 
     public double nextHop(){
+
         ListIterator<Edge> edges = current_node.getEdges();
         boolean hasUnvisitedNodes= false;
         try{
@@ -42,7 +43,7 @@ public class Ant implements EventHolder{
                 if(current_node.hasEdge(path.get(0).getID())){
                     ArrayList<Node> possibleHamil= new ArrayList<>(path);
                     possibleHamil.add(path.get(0));
-                    if(colony.isHamiltonian(possibleHamil.listIterator())){  //the cicle is hamiltonian, there is no problem
+                    if(colony.isHamiltonian(possibleHamil)){  //the cicle is hamiltonian, there is no problem
                         current_node=path.get(0);
                         path= new ArrayList<>();
                         path.add(current_node);
@@ -52,8 +53,9 @@ public class Ant implements EventHolder{
                 if(!is_ham){
                     current_node= calc_probs(current_node,new ArrayList<>(),colony.getAlpha(),colony.getBeta());
                     int index= path.indexOf(current_node);
-                    for(int i= index+1;i<path.size()-1;i++){
-                        path.remove(i);
+                    int previousSize=path.size();
+                    for(int i= 0;i<previousSize-index-1;i++){
+                        path.remove(index+1);
                     }
                 }
             }
@@ -94,7 +96,7 @@ public class Ant implements EventHolder{
             }
             if(is_valid){                                                                                   //IF THIS EDGE IS VALID ADD IT TO THE FORMULA
                 float probability= (alpha+edg.getPheromoneLevel())/(beta+edg.getWeight());             //TODO FORMULA
-                probs[counter]= probability;
+                probs[counter]= probability+total;
                 try {
                     n[counter]= edg.otherNode(s);
                 } catch (NotThisEdge_exeption notThisEdge_exeption) {
@@ -107,12 +109,26 @@ public class Ant implements EventHolder{
         }
         Random r = new Random();
         float ticket = r.nextFloat() * (total);
-        for(int i =nmbrOfProbs-1;i>=0;i--){
-            if(ticket<probs[i]){
+        //System.out.println("ticket is "+ticket+"counter is "+counter);
+        float[] probabilities=new float[counter];
+        for(int i =0;i<counter;i++){
+            probabilities[i]=probs[i]/total;
+        }
+        for(int i=0;i<counter;i++){
+            if(ticket<probabilities[i])
                 return n[i];
+        }
+/*        for (float pro:probs
+             ) {
+            System.out.print(", "+pro);
+        }
+        System.out.println("--");*/
+        for(int i =counter-2;i>=1;i--){
+            if(ticket<probs[i]){//TODO nao e menor, e maior TODO somar total as probabilidades do vector
+                return n[i+1];
             }
         }
-        return null;
+        return n[0];
     }
 
     @Override

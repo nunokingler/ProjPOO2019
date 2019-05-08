@@ -29,6 +29,13 @@ public class EvaporationEvent implements Event{
         return timeForNextEvaporation;
     }
 
+    public void start_evaps(){
+       if(!pec.contains(this)){
+           timeForNextEvaporation=pec.getCurrentTime()+PEC.expRandom(n);
+           pec.addEvent(this);
+       }
+    }
+
     public static int getNmbr_of_moves() {
         return nmbr_of_evaps;
     }

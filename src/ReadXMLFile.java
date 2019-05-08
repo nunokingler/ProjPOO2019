@@ -1,6 +1,4 @@
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,34 +8,34 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.xml.sax.*;
-import java.util.*;
+//import org.xml.sax.*;
+//import java.util.*;
 
 public class ReadXMLFile {
 
-    static String fileName;
-
+    private String fileName;
+    private SAXHandler handler;
 
     //static File xmlFile = new File ("C:/Users/henri/git/ProjPOO2019/data1.xml");
 
     //fileName = xmlFile.getName();
+    public ReadXMLFile(){
+        super();
+    }
 
-    public static void read_xml(){
+
+    public void inits(){
         File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/data1.xml");
         fileName=xmlFile.getName();
-        
-         int temp1, temp2=0;
-        
-        System.out.println("Beginning the parsing of " + fileName); 
 
-        
         try {
             SAXParserFactory fact = SAXParserFactory.newInstance();
             SAXParser saxParser = fact.newSAXParser();
 
             // parse the XML document with this handler
-            SAXHandler handler = new SAXHandler();
-            saxParser.parse(new File(fileName), handler);
+            handler = new SAXHandler();
+            //saxParser.parse(xmlFile,handler);//new File(fileName), handler);
+            saxParser.parse(new File(fileName),handler);
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -57,13 +55,49 @@ public class ReadXMLFile {
             List<Integer> Nodes = handler.getNodes();
             List<Integer> Target_nodes = handler.getTargetNode();
             List<Float> Edges = handler.getEdges();
-            
-            //Gama?
-            
-            Simulation simul = new Simulation(FloatParameters.get(0), FloatParameters.get(2),FloatParameters.get(3), IntParameters.get(0),IntParameters.get(1));
-            
+
+
+            System.out.println("----------------------------");
+
+
+
+         /*   Node nNode1 = nList1.item(temp1);
+            System.out.println("\nCurrent Element : " + nNode1.getNodeName());
+
+            for (temp1 = 0; temp1 < nList1.getLength(); temp1++) {
+
+                if (nNode1.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode1;
+                    System.out.println("NodeIDX : " + eElement.getAttribute("nodeidx"));
+                    NodeList nList2 = doc.getElementsByTagName("weight");
+               	    Node nNode2= nList2.item(temp2);
+                    for (temp2 = 0; temp2 < nList2.getLength(); temp2++) {
+                    	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
+                    		eElement = (Element) nNode2;
+                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode") + " Weight: " + eElement.getAttribute("weight") );
+                    }
+                }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public List<Integer> getIntParameteres(){
+        return handler.getParamInt();
+    }
+    public List<Float> getFloatParameters(){
+        return handler.getParamFloat();
+    }
+    public List<Integer> node1list(){
+        return handler.getNodes();
+    }
+    public List<Integer> node2list(){
+        return handler.getTargetNode();
+    }
+    public List<Float> weights(){
+        return handler.getEdges();
+    }
+    public List<Float>getMoves(){
+        return handler.getMoves();
     }
 }
