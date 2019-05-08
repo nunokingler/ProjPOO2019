@@ -9,9 +9,10 @@ public class  Main {
         //Instancia as coisas aqui
         //s.addNode();
 
-        ReadXMLFile read = new ReadXMLFile();
-
-
+        ReadXMLFile.read_xml();
+        
+        System.out.println("puta");
+        
         //Simulation simul = new Simulation(f_inst, evap1, evap2, ant_colsize, nest_node);
 
         try {

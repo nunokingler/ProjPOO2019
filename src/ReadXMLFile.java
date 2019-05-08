@@ -7,22 +7,30 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-//import org.xml.sax.*;
-//import java.util.*;
+import org.xml.sax.*;
+import java.util.*;
 
 public class ReadXMLFile {
 
     static String fileName;
 
+
     //static File xmlFile = new File ("C:/Users/henri/git/ProjPOO2019/data1.xml");
 
     //fileName = xmlFile.getName();
 
-    public static void main(String argv[]){
+    public static void read_xml(){
         File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/data1.xml");
         fileName=xmlFile.getName();
+        
+         int temp1, temp2=0;
+        
+        System.out.println("Beginning the parsing of " + fileName); 
 
+        
         try {
             SAXParserFactory fact = SAXParserFactory.newInstance();
             SAXParser saxParser = fact.newSAXParser();
@@ -49,29 +57,23 @@ public class ReadXMLFile {
             List<Integer> Nodes = handler.getNodes();
             List<Integer> Target_nodes = handler.getTargetNode();
             List<Float> Edges = handler.getEdges();
-
-
-            System.out.println("----------------------------");
-
-
-
-         /*   Node nNode1 = nList1.item(temp1);
-            System.out.println("\nCurrent Element : " + nNode1.getNodeName());
-
-            for (temp1 = 0; temp1 < nList1.getLength(); temp1++) {
-
-                if (nNode1.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode1;
-                    System.out.println("NodeIDX : " + eElement.getAttribute("nodeidx"));
-                    NodeList nList2 = doc.getElementsByTagName("weight");
-               	    Node nNode2= nList2.item(temp2);
-                    for (temp2 = 0; temp2 < nList2.getLength(); temp2++) {
-                    	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
-                    		eElement = (Element) nNode2;
-                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode") + " Weight: " + eElement.getAttribute("weight") );
-                    }
-                }
-            }*/
+            
+            Vector nodes = new Vector(); //= Nodes.get(temp1);
+            Vector target_nodes = new Vector(); //System.out.println("\nCurrent Element : " + Nodes.get(temp1));
+            Vector edges = new Vector();
+            
+            Vector intp = new Vector();
+            Vector floatp = new Vector(); //Syst);
+            
+            nodes.addAll(Nodes);
+            target_nodes.addAll(Target_nodes);
+            edges.addAll(Edges);
+            
+            intp.addAll(IntParameters);
+            floatp.addAll(FloatParameters);
+            
+            Simulation simul = new Simulation(intp.get(0),intp.get(1));
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

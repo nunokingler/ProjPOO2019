@@ -8,7 +8,7 @@ public class Simulation {
     private Graph graph;
     
 
-	public Simulation(float finalinst, float p, float n, int antcolsize, int nestNode) {
+	public Simulation(float finalinst, float n, float p, int antcolsize, int nestNode) {
 		//super();
 		this.finalinst = finalinst;
 		this.plevel = p;
