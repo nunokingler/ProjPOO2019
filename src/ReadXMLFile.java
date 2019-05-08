@@ -58,21 +58,9 @@ public class ReadXMLFile {
             List<Integer> Target_nodes = handler.getTargetNode();
             List<Float> Edges = handler.getEdges();
             
-            Vector nodes = new Vector(); //= Nodes.get(temp1);
-            Vector target_nodes = new Vector(); //System.out.println("\nCurrent Element : " + Nodes.get(temp1));
-            Vector edges = new Vector();
+            //Gama?
             
-            Vector intp = new Vector();
-            Vector floatp = new Vector(); //Syst);
-            
-            nodes.addAll(Nodes);
-            target_nodes.addAll(Target_nodes);
-            edges.addAll(Edges);
-            
-            intp.addAll(IntParameters);
-            floatp.addAll(FloatParameters);
-            
-            Simulation simul = new Simulation(intp.get(0),intp.get(1));
+            Simulation simul = new Simulation(FloatParameters.get(0), FloatParameters.get(2),FloatParameters.get(3), IntParameters.get(0),IntParameters.get(1));
             
         } catch (Exception e) {
             e.printStackTrace();
