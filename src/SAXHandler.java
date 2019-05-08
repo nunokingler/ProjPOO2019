@@ -128,6 +128,11 @@ public class SAXHandler extends DefaultHandler{
     			beta=Float.valueOf(in_beta);
     			delta=Float.valueOf(in_delta);
     			
+    			parametersFloat.add(alpha);
+    			parametersFloat.add(beta);
+    			parametersFloat.add(delta);
+    			
+    			
               //  System.out.println("Alpha: " + alpha  + " Beta: " + beta + " Delta: " + delta);
     		}
     	}
