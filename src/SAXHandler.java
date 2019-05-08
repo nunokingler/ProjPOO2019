@@ -8,15 +8,15 @@ import java.util.List;
 public class SAXHandler extends DefaultHandler{
 
     private String currentValue=null;
-    private List<Integer> nodes = null;
-    private List<Integer> target_nodes = null;
+    private List<Integer> nodes = new ArrayList<>();
+    private List<Integer> target_nodes = new ArrayList<>();
     
     private int node1, node2;
     private List<Float> edges = null; 
     private float edge;
     
-    private ArrayList<Integer> parametersInt=null;
-    private ArrayList<Float> parametersFloat=null;
+    private ArrayList<Integer> parametersInt=new ArrayList<>();
+    private ArrayList<Float> parametersFloat=new ArrayList<>();
     
     private float evap1;
     private float evap2;
@@ -36,9 +36,10 @@ public class SAXHandler extends DefaultHandler{
    // private float node2;
     
     
-    static String fileName; 
-    
-    @Override
+    static String fileName;
+	private ArrayList<Float> moves= new ArrayList<>();
+
+	@Override
     public void startDocument() throws SAXException {
     	
     	System.out.println("Beginning the parsing of " + fileName); 
@@ -99,8 +100,8 @@ public class SAXHandler extends DefaultHandler{
     			node1=Integer.valueOf(id_node);
     			
                 System.out.println("Node ID: " + Integer.valueOf(id_node));
-               // node1 = new Node(Integer.valueOf(id_node));
-				nodes.add(node1);
+
+				//nodes.add(node1);
 
       		}
     	}
@@ -115,6 +116,7 @@ public class SAXHandler extends DefaultHandler{
         		 
         		 System.out.print("Target node: " + Integer.valueOf(t_node));
         		 target_nodes.add(targ_node);
+				 nodes.add(node1);
         	 }
         }
     	else if (qName.equalsIgnoreCase("move")) {
@@ -123,10 +125,12 @@ public class SAXHandler extends DefaultHandler{
     			String in_alpha = attributes.getValue("alpha");
     			String in_beta = attributes.getValue("beta");
     			String in_delta = attributes.getValue("delta");
-    			alpha=Float.valueOf(in_alpha);
-    			beta=Float.valueOf(in_beta);
-    			delta=Float.valueOf(in_delta);
-    			
+    			//alpha=Float.valueOf(in_alpha);
+    			//beta=Float.valueOf(in_beta);
+    			//delta=Float.valueOf(in_delta);
+    			moves.add(Float.valueOf(in_alpha));
+    			moves.add(Float.valueOf(in_beta));
+    			moves.add(Float.valueOf(in_delta));
                 System.out.println("Alpha: " + alpha  + " Beta: " + beta + " Delta: " + delta);
     		}
     	}
@@ -186,6 +190,10 @@ public class SAXHandler extends DefaultHandler{
 
 	  public ArrayList<Integer> getParamInt() {
 		  return parametersInt;
+	  }
+
+	  public ArrayList<Float> getMoves(){
+    	return moves;
 	  }
 	  	  
 	public void endDocument(){

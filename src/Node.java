@@ -27,11 +27,13 @@ public class Node {
 	}
 
 	public ListIterator<Edge> getEdges(){
+	/*
 		ArrayList<Edge> edg = new ArrayList<Edge>();
 		for(int i= 0;i<edges.size();i++){
 			edg.add( new Edge(edges.get(i)));
 		}
-		return edg.listIterator(edg.size());
+		return edg.listIterator(edg.size());*/
+	return edges.listIterator();
 	}
 
 	@Override

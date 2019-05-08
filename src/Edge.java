@@ -72,6 +72,9 @@ public class Edge implements EventHolder{
     }
 
 	public void addPheromones(float value_to_add) {
+		if(pheromoneLevel==0){
+			event.start_evaps();
+		}
 		pheromoneLevel+=value_to_add;
 	}
 }

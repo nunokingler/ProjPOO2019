@@ -10,14 +10,13 @@ public class AntMoveEvent implements Event {
         sigma=sig;
         this.ant=ant;
         pec=PecHolder.pec;
-        pec.addEvent(this);
         time_for_next_move=0;
         pec.addEvent(this);
     }
 
     @Override
     public void doEvent() {
-        time_for_next_move= PEC.expRandom(time_for_next_move+ant.nextHop());
+        time_for_next_move= time_for_next_move+ PEC.expRandom(ant.nextHop());
         pec.addEvent(this);
         nmbr_of_moves++;
     }

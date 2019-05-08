@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 public class AntColony {
 
@@ -15,10 +16,7 @@ public class AntColony {
 
 	AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
-		ants= new ArrayList<>();
-		for(int i=0;i<_Antsnumber;i++){
-			ants.add(new Ant(this,starting_node, delta));
-		}
+
 		antsnumber=_Antsnumber;
 		this.graph=graph;
 		this.starting_node=graph.getNode(Starting_node);
@@ -26,6 +24,10 @@ public class AntColony {
 		alpha=0;
 		beta=0;
 		delta =0;
+		ants= new ArrayList<>();
+		for(int i=0;i<_Antsnumber;i++){
+			ants.add(new Ant(this,starting_node, delta));
+		}
 	}
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
@@ -47,7 +49,8 @@ public class AntColony {
    		if(starting_node.isEmpty()&&antsnumber<maxAnts)
    			ants.add(new Ant(this,starting_node,Constants.sigma));
 	}
-	public boolean isHamiltonian(ListIterator<Node> path){
+	public boolean isHamiltonian(List<Node> pathTaken){
+		ListIterator<Node> path=pathTaken.listIterator();
    		int nodes[]= new int[graph.getNodeNumber()];
 		Node next=null;
 
@@ -57,28 +60,28 @@ public class AntColony {
 
    		while(path.hasNext()){
    			next =path.next();
-   			nodes[next.getID()]=1;
+   			nodes[next.getID()-1]=1;
 		}
 
    		for(int i=0;i<nodes.length;i++){
 			if(nodes[i]==0)
 				return false;
 		}
-   		ArrayList<Node> completeCicle= new ArrayList<>();
-   		completeCicle.add(next);
+   		ArrayList<Node> completeCicle= new ArrayList<>(pathTaken);
+   		path=completeCicle.listIterator();
    		Node previNode=next;
 		float totalWeight=0;
 		try {
-			while (path.hasPrevious()) {
-				next = path.previous();
+			while (path.hasNext()) {
+				next = path.next();
 				totalWeight += next.getEdgeToWeight(previNode.getID());
-				completeCicle.add(0, next);
 				previNode = next;
 			}
 		}catch (NotThisEdge_exeption ex){
 			ex.printStackTrace();
 		}
    		graph.addPheromones( completeCicle.listIterator(), gamma/totalWeight);
+		hamiltonians.add(completeCicle);
    		//hamiltonians.add(new ArrayList<>((Collection<Node>) path)); //TODO check if this works
 		return true;
 	}
