@@ -1,11 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+
 public class AntColony {
 
 	private int antsnumber,maxAnts;
 	private ArrayList<Ant> ants;
-	private ArrayList<ArrayList<Node>> hamiltonians;
+	private HashMap<String,ArrayList<Node>> hamiltonians;
 	private Node starting_node;
 	private Graph graph;
 	private float alpha;
@@ -20,7 +19,7 @@ public class AntColony {
 		antsnumber=_Antsnumber;
 		this.graph=graph;
 		this.starting_node=graph.getNode(Starting_node);
-		hamiltonians =new ArrayList<>();
+		hamiltonians =new HashMap<>();
 		alpha=0;
 		beta=0;
 		delta =0;
@@ -71,9 +70,11 @@ public class AntColony {
    		path=completeCicle.listIterator();
    		Node previNode=next;
 		float totalWeight=0;
+		String key="";
 		try {
 			while (path.hasNext()) {
 				next = path.next();
+				key+=next.toString();
 				totalWeight += next.getEdgeToWeight(previNode.getID());
 				previNode = next;
 			}
@@ -81,22 +82,33 @@ public class AntColony {
 			ex.printStackTrace();
 		}
    		graph.addPheromones( completeCicle.listIterator(), gamma/totalWeight);
-		hamiltonians.add(completeCicle);
-   		//hamiltonians.add(new ArrayList<>((Collection<Node>) path)); //TODO check if this works
+
+		if(!hamiltonians.containsKey(key))
+			hamiltonians.put(key,completeCicle);
 		return true;
 	}
 
 
 	@Override
-	public String toString() {
+	public String toString() {//TODO tirar o primeiro no dos prints e mudar hamiltonians para hashmap de forma a nao haver ciclos repetidos
    		if(hamiltonians.size()==0)
    			return "";
    		String to_send="";
+   		/*
 		for(int i = 0; i< hamiltonians.size(); i++){
 			ArrayList<Node> path= hamiltonians.get(i);
 			to_send+='{';
-			for(int j=0;j<path.size();j++){
+			for(int j=0;j<path.size()-1;j++){
 				to_send+=","+path.get(j).getID()+",";
+			}
+			to_send+='}';
+		}*/
+		for (ArrayList<Node> cicle : hamiltonians.values()) {
+			to_send+='{';
+			for(int i=0;i<cicle.size()-1;i++){
+				to_send+=+cicle.get(i).getID();
+				if(i!=(cicle.size()-2))
+					to_send+=",";
 			}
 			to_send+='}';
 		}

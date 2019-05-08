@@ -15,9 +15,6 @@ public class Ant implements EventHolder{
         path=new ArrayList<>();
         path.add(current_node);
         this.colony=colony;
-       // alpha=al;
-       // beta=bt;
-        this.colony=colony;
         event = new AntMoveEvent(this,sig);
     }
 
@@ -68,7 +65,7 @@ public class Ant implements EventHolder{
     }
 
     private double travelTime(Edge travel_back_edge,float sigma) {
-        return PEC.expRandom(travel_back_edge.getWeight()*sigma);//TODO formula para travel time
+        return PEC.expRandom(travel_back_edge.getWeight()*sigma);
     }
 
     private static Node calc_probs(Node s, ArrayList<Node> to_avoid,float alpha,float beta){
@@ -95,7 +92,7 @@ public class Ant implements EventHolder{
                 }
             }
             if(is_valid){                                                                                   //IF THIS EDGE IS VALID ADD IT TO THE FORMULA
-                float probability= (alpha+edg.getPheromoneLevel())/(beta+edg.getWeight());             //TODO FORMULA
+                float probability= (alpha+edg.getPheromoneLevel())/(beta+edg.getWeight());
                 probs[counter]= probability+total;
                 try {
                     n[counter]= edg.otherNode(s);
@@ -123,11 +120,6 @@ public class Ant implements EventHolder{
             System.out.print(", "+pro);
         }
         System.out.println("--");*/
-        for(int i =counter-2;i>=1;i--){
-            if(ticket<probs[i]){//TODO nao e menor, e maior TODO somar total as probabilidades do vector
-                return n[i+1];
-            }
-        }
         return n[0];
     }
 
