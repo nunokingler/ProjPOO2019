@@ -9,7 +9,11 @@ public class Ant implements EventHolder{
  // private float alpha, beta;
     private AntColony colony;
     private AntMoveEvent event;
-
+    /* Default constructor for ant
+        @param colony the colony this ant belongs to, it is used to get parameters regaring movement
+        @param current_node the starting node for this ant
+        @param sig used to calculate travel time
+    * */
     public Ant(AntColony colony,Node current_node,float sig) {
         this.current_node = current_node;
         path=new ArrayList<>();
@@ -17,7 +21,10 @@ public class Ant implements EventHolder{
         this.colony=colony;
         event = new AntMoveEvent(this,sig);
     }
-
+/* This method calculates what the next hop location will be acording to the current path and returns the travel time of
+    the edge chosen
+    @return double travel time
+* */
     public double nextHop(){
 
         ListIterator<Edge> edges = current_node.getEdges();
@@ -59,11 +66,23 @@ public class Ant implements EventHolder{
         }
          return -1;
     }
-
+    /* This method returns the time it takes to travel a specific edge acording to a parameter sigma
+        @param travel_back_edge the edge to calculate travel time
+        @param sigma used to calculate travel time
+        @return double travel time
+    * */
     private double travelTime(Edge travel_back_edge,float sigma) {
         return PEC.expRandom(travel_back_edge.getWeight()*sigma);
     }
+    /* This method returns the node to travel to acording to the to_avoid list and using parameters alpha and beta
+        @param s node from wich to travel
+        @param to_avoid list of nodes that cant be traveled to
 
+        @param alpha     both are parameters used to calculate probability of traveling to nodes
+        @param beta
+
+        @return Node the node for wich was decided the ant would travel
+    * */
     private static Node calc_probs(Node s, ArrayList<Node> to_avoid,float alpha,float beta){
         int nmbrOfProbs= s.getEdgeNmbr(), counter=0;
         float probs[]=new float[nmbrOfProbs],total=0;
@@ -118,7 +137,9 @@ public class Ant implements EventHolder{
         System.out.println("--");*/
         return n[0];
     }
-
+    /* This method returns the event for wich this instance is associated
+    @return the event related to this ant
+* */
     @Override
     public Event getEvent() {
         return event;
