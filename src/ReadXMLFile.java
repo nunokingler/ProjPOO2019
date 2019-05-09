@@ -5,6 +5,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,45 +40,12 @@ public class ReadXMLFile {
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
+            Document doc=null;
 
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
+//            doc = dBuilder.parse(xmlFile);
 
-            System.out.println("Root element : " + doc.getDocumentElement().getNodeName());
+//            doc.getDocumentElement().normalize();
 
-            // NodeList nList1 = doc.getElementsByTagName("node");
-
-            ArrayList<Integer> IntParameters = handler.getParamInt();
-            ArrayList<Float> FloatParameters = handler.getParamFloat();
-
-            List<Integer> Nodes = handler.getNodes();
-            List<Integer> Target_nodes = handler.getTargetNode();
-            List<Float> Edges = handler.getEdges();
-
-
-            System.out.println("----------------------------");
-
-
-
-         /*   Node nNode1 = nList1.item(temp1);
-            System.out.println("\nCurrent Element : " + nNode1.getNodeName());
-
-            for (temp1 = 0; temp1 < nList1.getLength(); temp1++) {
-
-                if (nNode1.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode1;
-                    System.out.println("NodeIDX : " + eElement.getAttribute("nodeidx"));
-                    NodeList nList2 = doc.getElementsByTagName("weight");
-               	    Node nNode2= nList2.item(temp2);
-                    for (temp2 = 0; temp2 < nList2.getLength(); temp2++) {
-                    	if (nNode2.getNodeType() == Node.ELEMENT_NODE)
-                    		eElement = (Element) nNode2;
-                    		System.out.println("Target Node : " + eElement.getAttribute("targetnode") + " Weight: " + eElement.getAttribute("weight") );
-                    }
-                }
-            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

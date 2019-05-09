@@ -16,14 +16,16 @@ public class Edge implements EventHolder{
 
 	public Edge(float weight, float evaporationTime,float evaporationValue, Node node1, Node node2) {
 		this.weight = weight;
-		this.evaporation = evaporation;
+		this.evaporation = 0;
 		this.node1 = node1;
 		this.node2 = node2;
 		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);
 	}
 
     public boolean evaporate(float evaporationValue) {
+
 	    float next_pheromone = pheromoneLevel-evaporationValue;//TODO EVAPORATION FORMULA
+
 	    if(next_pheromone>0){
 	    	pheromoneLevel=next_pheromone;
 	    	return true;

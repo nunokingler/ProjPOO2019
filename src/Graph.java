@@ -10,13 +10,14 @@ public class Graph {
 
 	private HashMap<Integer,Node> nodes;
 	private HashMap<String,Edge> edges;
-	private float n,p;
+	private float n,p,allEdgesWeights;
 
 	Graph(float n, float p){
 		this.nodes= new HashMap<>();
 		this.edges= new HashMap<>();
 		this.n=n;
 		this.p=p;
+		allEdgesWeights=0;
 	}
 
 	public void addNode(int nodeNmbr, ArrayList<Float> connections_weight,ArrayList<Integer> connections_other__node ) throws DuplicatesExeption, SizeMismatchException, DiferentWeightExeption {
@@ -57,6 +58,7 @@ public class Graph {
 			else{
 				this.edges.put(sum,edge_to_add);
 			}
+			allEdgesWeights+=edge_to_add.getWeight();
 			to_add.addEdge(edge_to_add);
 		}
 		nodes.put(nodeNmbr,to_add);
@@ -75,7 +77,7 @@ public class Graph {
 		nodes.get(node1).addEdge(to_add);
 		nodes.get(node2).addEdge(to_add);
 		String sum= node2>node1? Integer.toString(node1 )+'|'+Integer.toString(node2): Integer.toString(node2)+'|'+Integer.toString(node1);
-
+		allEdgesWeights+=to_add.getWeight();
 		edges.put(sum,to_add);
 	}
 
@@ -98,7 +100,7 @@ public class Graph {
 			try {
 				edge=previNode.getEdgeTo(node);
 				edge=previNode.getEdgeTo(node);
-				edge.addPheromones(edge.getWeight()*valueToAdd);
+				edge.addPheromones(allEdgesWeights*valueToAdd);
 			} catch (NotThisEdge_exeption notThisEdge_exeption) {
 				notThisEdge_exeption.printStackTrace();
 			}

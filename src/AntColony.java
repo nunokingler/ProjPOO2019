@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.*;
+
 public class AntColony {
 
 	private int antsnumber,maxAnts;
 	private ArrayList<Ant> ants;
-	private ArrayList<ArrayList<Node>> hamiltonians;
+	private HashMap<String,ArrayList<Node>> hamiltonians;
+	private ArrayList<Node> best_ham;
+	private float best_ham_weight;
 	private Node starting_node;
 	private Graph graph;
 	private float alpha;
@@ -20,10 +24,12 @@ public class AntColony {
 		antsnumber=_Antsnumber;
 		this.graph=graph;
 		this.starting_node=graph.getNode(Starting_node);
-		hamiltonians =new ArrayList<>();
+		hamiltonians =new HashMap<>();
 		alpha=0;
 		beta=0;
 		delta =0;
+		best_ham=new ArrayList<>();
+		best_ham_weight=Integer.MAX_VALUE;
 		ants= new ArrayList<>();
 		for(int i=0;i<_Antsnumber;i++){
 			ants.add(new Ant(this,starting_node, delta));
@@ -45,10 +51,6 @@ public class AntColony {
 		this.gamma = gamma;
 	}
 
-	public void antFirstMove(){
-   		if(starting_node.isEmpty()&&antsnumber<maxAnts)
-   			ants.add(new Ant(this,starting_node,Constants.sigma));
-	}
 	public boolean isHamiltonian(List<Node> pathTaken){
 		ListIterator<Node> path=pathTaken.listIterator();
    		int nodes[]= new int[graph.getNodeNumber()];
@@ -81,28 +83,27 @@ public class AntColony {
 			ex.printStackTrace();
 		}
    		graph.addPheromones( completeCicle.listIterator(), gamma/totalWeight);
-		hamiltonians.add(completeCicle);
-   		//hamiltonians.add(new ArrayList<>((Collection<Node>) path)); //TODO check if this works
+		if(totalWeight<best_ham_weight){
+			best_ham=completeCicle;
+			best_ham_weight=totalWeight;
+		}
+
 		return true;
 	}
 
 
 	@Override
-	public String toString() {
-   		if(hamiltonians.size()==0)
+	public String toString() {//TODO tirar o primeiro no dos prints e mudar hamiltonians para hashmap de forma a nao haver ciclos repetidos
+   		if(best_ham.size()==0)
    			return "";
    		String to_send="";
-		for(int i = 0; i< hamiltonians.size(); i++){
-			ArrayList<Node> path= hamiltonians.get(i);
-			
-			to_send+='{';
-						
-			for(int j=0;j<path.size()-1;j++){
-				to_send+=path.get(j).getID();
+		to_send+='{';
+		for(int i=0;i<best_ham.size()-1;i++){
+			to_send+=+best_ham.get(i).getID();
+			if(i!=(best_ham.size()-2))
 				to_send+=",";
-			}
-			to_send+='}';
 		}
+		to_send+='}';
 		return to_send;
 	}
 
