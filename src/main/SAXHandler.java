@@ -1,3 +1,4 @@
+package main;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -14,7 +15,7 @@ public class SAXHandler extends DefaultHandler{
     
     private int node1;
     private List<Float> edges = null; 
-    private float edge;
+//    private float edge;
     
     private ArrayList<Integer> parametersInt=new ArrayList<>();
     private ArrayList<Float> parametersFloat=new ArrayList<>();

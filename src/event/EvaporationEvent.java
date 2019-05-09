@@ -1,3 +1,8 @@
+package event;
+import pec.PEC;
+import pec.PecHolder;
+import property.Edge;
+
 public class EvaporationEvent implements Event{
     private float n // related to time
             ,p;     //related to value

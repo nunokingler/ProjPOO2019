@@ -1,10 +1,20 @@
+package simulation;
 //contains nodes
 
+import exception.*;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ListIterator;
+
+import exception.DiferentWeightExeption;
+import exception.DuplicatesExeption;
+import exception.NotThisEdge_exeption;
+import exception.SizeMismatchException;
+import exception.ThisEdgeAlreadyExists;
+import property.Edge;
+import property.Node;
 
 public class Graph {
 

@@ -1,3 +1,9 @@
+package property;
+import event.EvaporationEvent;
+import event.Event;
+import event.EventHolder;
+import exception.NotThisEdge_exeption;
+
 public class Edge implements EventHolder{
 
 	private float weight;

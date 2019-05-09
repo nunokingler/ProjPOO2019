@@ -1,4 +1,12 @@
+package simulation;
 import java.util.ArrayList;
+
+import ant.AntColony;
+import exception.DiferentWeightExeption;
+import exception.DuplicatesExeption;
+import exception.NotThisEdge_exeption;
+import exception.SizeMismatchException;
+import exception.ThisEdgeAlreadyExists;
 
 public class Simulation {
 
