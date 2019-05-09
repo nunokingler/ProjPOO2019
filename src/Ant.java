@@ -36,19 +36,15 @@ public class Ant implements EventHolder{
                 path.add(current_node);
             }
             else{
-                boolean is_ham=false;
-                if(current_node.hasEdge(path.get(0).getID())){
-                    ArrayList<Node> possibleHamil= new ArrayList<>(path);
-                    possibleHamil.add(path.get(0));
-                    if(colony.isHamiltonian(possibleHamil)){  //the cicle is hamiltonian, there is no problem
-                        current_node=path.get(0);
-                        path= new ArrayList<>();
-                        path.add(current_node);
-                        is_ham=true;
-                    }
+
+                current_node= calc_probs(current_node,new ArrayList<>(),colony.getAlpha(),colony.getBeta());
+                ArrayList<Node> possibleHamil= new ArrayList<>(path);
+                possibleHamil.add(current_node);
+                if(current_node==path.get(0) && colony.isHamiltonian(possibleHamil)){//is hamil
+                    path= new ArrayList<>();
+                    path.add(current_node);
                 }
-                if(!is_ham){
-                    current_node= calc_probs(current_node,new ArrayList<>(),colony.getAlpha(),colony.getBeta());
+                else{
                     int index= path.indexOf(current_node);
                     int previousSize=path.size();
                     for(int i= 0;i<previousSize-index-1;i++){
