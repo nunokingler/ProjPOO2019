@@ -1,7 +1,7 @@
 package event;
 import pec.PEC;
 import pec.PecHolder;
-import property.Edge;
+import ant.Edge;
 
 public class EvaporationEvent implements Event{
     private float n // related to time
@@ -34,7 +34,7 @@ public class EvaporationEvent implements Event{
         nmbr_of_evaps++;
     }
     /** returns time for the next evaporation
-    @returns double
+    @return double
     * */
     @Override
     public double getTime() {

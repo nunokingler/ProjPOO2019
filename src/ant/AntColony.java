@@ -1,8 +1,4 @@
 package ant;
-import exception.NotThisEdge_exeption;
-import property.Node;
-import simulation.Graph;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -20,10 +16,10 @@ public class AntColony {
 	private float delta;
 	private float gamma;
 
-	/* Default constructor for AntColony
+	/** Default constructor for AntColony
         @param _Antsnumber the max number of ants of this colony
         @param graph the graph where this colony is placed
-        @return int starting_node the number of node containing this ant colony
+        @param  Starting_node starting_node the number of node containing this ant colony
     * */
 	public AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
@@ -41,27 +37,35 @@ public class AntColony {
 			ants.add(new Ant(this,starting_node, delta));
 		}
 	}
-
+/**sets the value of alpha(used to calculate node jumps)
+ * @param alpha value to set alpha to
+ * */
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
 	}
-
+	/**sets the value of beta(used to calculate node jumps)
+	 * @param beta value to set beta to
+	 * */
 	public void setBeta(float beta) {
 		this.beta = beta;
 	}
-
+	/**sets the value of delta(used to calculate time between node jumps)
+	 * @param delta value to set delta to
+	 * */
 	public void setDelta(float delta) {
 		this.delta = delta;
 	}
-
+	/**sets the value of gamma(used to calculate the ammout of pheromones to add)
+	 * @param gamma value to set gamma to
+	 * */
 	public void setGamma(float gamma) {
 		this.gamma = gamma;
 	}
-	/* Evaluates if a certain cicle is hamiltonian or not
+	/** Evaluates if a certain cicle is hamiltonian or not
         @param pathTaken the path done by the cicle
         @return true if the cicle is hamiltonian, false otherwise
     * */
-	public boolean isHamiltonian(List<Node> pathTaken){
+	protected boolean isHamiltonian(List<Node> pathTaken){
 		ListIterator<Node> path=pathTaken.listIterator();
    		int nodes[]= new int[graph.getNodeNumber()];
 		Node next=null;
@@ -75,23 +79,21 @@ public class AntColony {
    			nodes[next.getID()-1]=1;
 		}
 
-   		for(int i=0;i<nodes.length;i++){
-			if(nodes[i]==0)
+		for (int node : nodes) {
+			if (node == 0)
 				return false;
 		}
    		ArrayList<Node> completeCicle= new ArrayList<>(pathTaken);
    		path=completeCicle.listIterator();
    		Node previNode=next;
 		float totalWeight=0;
-		try {
-			while (path.hasNext()) {
-				next = path.next();
-				totalWeight += next.getEdgeToWeight(previNode.getID());
-				previNode = next;
-			}
-		}catch (NotThisEdge_exeption ex){
-			ex.printStackTrace();
+
+		while (path.hasNext()) {
+			next = path.next();
+			totalWeight += next.getEdgeToWeight(previNode.getID());
+			previNode = next;
 		}
+
    		graph.addPheromones( completeCicle.listIterator(), gamma/totalWeight);
 		if(totalWeight<best_ham_weight){
 			best_ham=completeCicle;
@@ -101,7 +103,9 @@ public class AntColony {
 		return true;
 	}
 
-
+	/** Returns the shortest Hamiltonian cicle found yet
+	 * @return String Hamiltonian cycle in format {node0,node1,node2,...,noden-1} if we consider node n == node 1
+	 * */
 	@Override
 	public String toString() {//TODO tirar o primeiro no dos prints e mudar hamiltonians para hashmap de forma a nao haver ciclos repetidos
    		if(best_ham.size()==0)
@@ -116,19 +120,27 @@ public class AntColony {
 		to_send+='}';
 		return to_send;
 	}
-
+	/** Returns the current alpha for this antColony
+	 * @return float alpha
+	 * */
 	public float getAlpha() {
    		return alpha;
 	}
-
+	/** Returns the current beta for this antColony
+	 * @return float beta
+	 * */
 	public float getBeta() {
 		return beta;
 	}
-
+	/** Returns the current delta for this antColony
+	 * @return float delta
+	 * */
 	public float getDelta() {
 		return delta;
 	}
-
+	/** Returns the current gamma for this antColony
+	 * @return float gamma
+	 * */
 	public float getGamma() {
 		return gamma;
 	}

@@ -1,8 +1,8 @@
 package main;
 
 import event.Event;
+import exception.AntsAlreadyLoadedExeption;
 import exception.NoEventException;
-import exception.NotThisEdge_exeption;
 import exception.ThisEdgeAlreadyExists;
 import pec.PEC;
 import pec.PecHolder;
@@ -14,10 +14,6 @@ public class  Main {
 
     public static void main(String[] args) {
         PEC pec = PecHolder.pec;
-       // Simulation s = new Simulation(20,0,0,50,1);
-
-        //Instancia as coisas aqui
-        //s.addNode();
 
         ReadXMLFile read = new ReadXMLFile();
         String pathname=args[0];//"C:/Users/Cavaco/IdeaProjects/ProjPOO2019/resources/data1.xml";//
@@ -38,13 +34,15 @@ public class  Main {
         for(int i=0;i<node1.size();i++){//for each edge
             try {
                 simul.addEdge(node1.get(i),node2.get(i),weights.get(i));//add it to the graph
-            } catch (NotThisEdge_exeption notThisEdge_exeption) {
-                notThisEdge_exeption.printStackTrace();
             } catch (ThisEdgeAlreadyExists thisEdgeAlreadyExists) {
                 thisEdgeAlreadyExists.printStackTrace();
             }
         }
-        simul.LoadAnts(inters.get(0),inters.get(1));//graph is complete, time to start the ants
+        try {
+            simul.LoadAnts(inters.get(0),inters.get(1));//graph is complete, time to start the ants
+        } catch (AntsAlreadyLoadedExeption antsAlreadyLoadedExeption) {
+            antsAlreadyLoadedExeption.printStackTrace();
+        }
 
         List<Float> moveParam=read.getMoves();//setting simulation related parameters
         simul.setAlpha(moveParam.get(0));

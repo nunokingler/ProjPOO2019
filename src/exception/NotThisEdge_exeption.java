@@ -1,5 +1,5 @@
 package exception;
-import property.Edge;
+import ant.Edge;
 
 public class NotThisEdge_exeption extends Exception {
     private Edge this_edge;

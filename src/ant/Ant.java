@@ -4,8 +4,6 @@ import event.Event;
 import event.EventHolder;
 import exception.NotThisEdge_exeption;
 import pec.PEC;
-import property.Edge;
-import property.Node;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -18,7 +16,7 @@ public class Ant implements EventHolder{
  // private float alpha, beta;
     private AntColony colony;
     private AntMoveEvent event;
-    /* Default constructor for ant
+    /** Default constructor for ant
         @param colony the colony this ant belongs to, it is used to get parameters regaring movement
         @param current_node the starting node for this ant
         @param sig used to calculate travel time
@@ -30,7 +28,7 @@ public class Ant implements EventHolder{
         this.colony=colony;
         event = new AntMoveEvent(this);
     }
-/* This method calculates what the next hop location will be acording to the current path and returns the travel time of
+/** This method calculates what the next hop location will be acording to the current path and returns the travel time of
     the edge chosen
     @return double travel time
 * */
@@ -75,7 +73,7 @@ public class Ant implements EventHolder{
         }
          return -1;
     }
-    /* This method returns the time it takes to travel a specific edge acording to a parameter sigma
+    /** This method returns the time it takes to travel a specific edge acording to a parameter sigma
         @param travel_back_edge the edge to calculate travel time
         @param sigma used to calculate travel time
         @return double travel time
@@ -83,12 +81,12 @@ public class Ant implements EventHolder{
     private double travelTime(Edge travel_back_edge,float sigma) {
         return PEC.expRandom(travel_back_edge.getWeight()*sigma);
     }
-    /* This method returns the node to travel to acording to the to_avoid list and using parameters alpha and beta
+    /** This method returns the node to travel to acording to the to_avoid list and using parameters alpha and beta
         @param s node from wich to travel
         @param to_avoid list of nodes that cant be traveled to
 
-        @param alpha     both are parameters used to calculate probability of traveling to nodes
-        @param beta
+        @param alpha parameter used to calculated the next node
+        @param beta  parameter used to calculated the next node
 
         @return Node the node for wich was decided the ant would travel
     * */
@@ -101,16 +99,13 @@ public class Ant implements EventHolder{
         while(eit.hasNext()){                                                                               //WHILE THERE ARE STILL EDGES TO CHECK
             Edge edg = eit.next();
             boolean is_valid=true;
-            ListIterator<Node> nit= to_avoid.listIterator();
 
-            while(nit.hasNext()){                                                                           //CHECK IF NODE IS ONE OF THE NODES TO AVOID
-                Node to_check=nit.next();
-                try{
-                    if( edg.otherNode(s).getID()==to_check.getID()){
-                        is_valid=false;
+            for (Node to_check : to_avoid) {                                                                           //CHECK IF NODE IS ONE OF THE NODES TO AVOID
+                try {
+                    if (edg.otherNode(s).getID() == to_check.getID()) {
+                        is_valid = false;
                     }
-                }
-                catch (NotThisEdge_exeption ex) {
+                } catch (NotThisEdge_exeption ex) {
                     ex.print_da_data();
                     ex.printStackTrace();
                 }
@@ -130,7 +125,6 @@ public class Ant implements EventHolder{
         }
         Random r = new Random();
         float ticket = r.nextFloat() * (total);
-        //System.out.println("ticket is "+ticket+"counter is "+counter);
         float[] probabilities=new float[counter];
         for(int i =0;i<counter;i++){
             probabilities[i]=probs[i]/total;
@@ -139,14 +133,9 @@ public class Ant implements EventHolder{
             if(ticket<probabilities[i])
                 return n[i];
         }
-/*        for (float pro:probs
-             ) {
-            System.out.print(", "+pro);
-        }
-        System.out.println("--");*/
         return n[0];
     }
-    /* This method returns the event for wich this instance is associated
+    /** This method returns the event for wich this instance is associated
     @return the event related to this ant
 * */
     @Override

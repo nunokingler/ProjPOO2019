@@ -3,6 +3,7 @@ package event;
 * */
 public interface EventHolder {
     /** get said event
+     * @return Event
 *   */
     Event getEvent();
 }

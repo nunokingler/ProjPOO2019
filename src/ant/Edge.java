@@ -1,4 +1,4 @@
-package property;
+package ant;
 import event.EvaporationEvent;
 import event.Event;
 import event.EventHolder;
@@ -18,11 +18,14 @@ public class Edge implements EventHolder{
 		this.node1=e.node1;
 		this.node2=e.node2;
 		this.event = e.event;
+		this.pheromoneLevel=e.pheromoneLevel;
 	}
 	/** Default constructor for Edge
+	 * @param weight the desired weight of this edge
         @param evaporationTime parameter regargint the time for each evaporation
         @param evaporationValue amount taken each evaporation
-        @param node1, node2 nodes that this edge connects
+        @param node1 nodes1 that this edge connects
+		@param node2 nodes2 that this edge connects
     * */
 	public Edge(float weight, float evaporationTime,float evaporationValue, Node node1, Node node2) {
 		this.weight = weight;
@@ -32,8 +35,8 @@ public class Edge implements EventHolder{
 		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);
 	}
 	/** evaporates according to the value given by
-	@param evaporationValue
-	@returns true if there is more pheromones to evaporate(another event needs to occur) false otherwise
+	@param evaporationValue value to evaporate by
+	@return true if there is more pheromones to evaporate(another event needs to occur) false otherwise
     * */
     public boolean evaporate(float evaporationValue) {
 
@@ -57,7 +60,9 @@ public class Edge implements EventHolder{
 		return pheromoneLevel;
 	}
 	/** returns the node that is not referenced in @param N , @throws NotThisEdge_exeption if the edge does not contain N
-	@returns Node other node
+	 * @param N one of the nodes this edge conains
+	   @return Node other node
+	   @throws NotThisEdge_exeption if this edge does not contain the node N
     * */
 	public Node otherNode(Node N)throws NotThisEdge_exeption{
 		if(N.getID()==node1.getID()){

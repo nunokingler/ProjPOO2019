@@ -27,14 +27,14 @@ public class AntMoveEvent implements Event {
         nmbr_of_moves++;
     }
     /** returns the time for the next move
-    @returns double time
+    @return double time
     * */
     @Override
     public double getTime() {
         return time_for_next_move;
     }
     /** returns the total number of moves since program start
-    @returns int number of moves
+    @return int number of moves
     * */
     public static int getNmbr_of_moves() {
         return nmbr_of_moves;

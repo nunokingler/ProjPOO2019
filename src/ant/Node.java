@@ -1,7 +1,5 @@
-package property;
+package ant;
 
-import exception.AlreadyFilledExeption;
-import exception.NotFullExeption;
 import exception.NotThisEdge_exeption;
 
 import java.util.ArrayList;
@@ -12,7 +10,6 @@ public class Node {
 	
 		private int nodeidx;
 		private ArrayList<Edge> edges;
-		private boolean busy;
 	/** Constructor for node that already references edges
 	@param nodeidx node ID
 	@param edges edges
@@ -20,7 +17,6 @@ public class Node {
 	public Node(int nodeidx, ArrayList<Edge> edges) {
 		this.nodeidx = nodeidx;
 		this.edges = edges;
-		busy = false;
 	}
 	/** Default constructor for Node
 	@param nodeidx node ID
@@ -29,10 +25,6 @@ public class Node {
         this.nodeidx = nodeidx;
         this.edges = new ArrayList<>();
     }
-
-    public boolean getBusy(){
-	    return busy;
-	}
 
 	public int getEdgeNmbr(){
 		return edges.size();
@@ -69,51 +61,56 @@ public class Node {
 				"nodeidx=" + nodeidx +
 				'}';
 	}
-	/** checks if this node contains an edge to the node with number @param other_nodeNmbr
-	@returns boolean true if the edge exits, false otherwise
+	/** checks if this node contains an edge to the node with number
+	 * @param other_nodeNmbr ID of the node to check connection
+	   @return boolean true if the edge exits, false otherwise
 * */
-	public boolean hasEdge(int other_nodeNmbr) throws NotThisEdge_exeption {
+	public boolean hasEdge(int other_nodeNmbr){
 		for(int i =0;i<edges.size();i++){
-			if(this.edges.get(i).otherNode(this).getID()==other_nodeNmbr)
-				return true;//this.edges.get(i).getWeight();
+			try {
+				if(this.edges.get(i).otherNode(this).getID()==other_nodeNmbr)
+					return true;//this.edges.get(i).getWeight();
+			} catch (NotThisEdge_exeption notThisEdge_exeption) {
+				edges.remove(edges.get(i));
+				System.out.println("Removed Edge on node "+this.getID()+" because it wasnt mine");
+				notThisEdge_exeption.printStackTrace();
+			}
 		}
 		return false;
 	}
 	/** returns the weight of the edge to node @param other
-	@returns float weight
+	 * @param other ID of the other node to check
+	@return float weight
     * */
-	public float getEdgeToWeight(int other) throws NotThisEdge_exeption {
+	public float getEdgeToWeight(int other) {
 		for(int i =0;i<edges.size();i++){
-			if(this.edges.get(i).otherNode(this).getID()==other)
-				return this.edges.get(i).getWeight();
+			try {
+				if(this.edges.get(i).otherNode(this).getID()==other)
+					return this.edges.get(i).getWeight();
+			} catch (NotThisEdge_exeption notThisEdge_exeption) {
+				edges.remove(edges.get(i));
+				System.out.println("Removed Edge on node "+this.getID()+" because it wasnt mine");
+				notThisEdge_exeption.printStackTrace();
+			}
 		}
 		return -1;
 	}
 	/** Returns the edge to node @param node
-	*  @returns edge said edge
+	 * @param node ID of the other node to check
+	*  @return edge said edge
     * */
-	public Edge getEdgeTo(Node node) throws NotThisEdge_exeption {
+	public Edge getEdgeTo(Node node)  {
 		for(int i =0;i<edges.size();i++){
-			if(this.edges.get(i).otherNode(this).getID()==node.getID())
-				return this.edges.get(i);
+			try {
+				if(this.edges.get(i).otherNode(this).getID()==node.getID())
+					return this.edges.get(i);
+			} catch (NotThisEdge_exeption notThisEdge_exeption) {
+				edges.remove(edges.get(i));
+				System.out.println("Removed Edge on node "+this.getID()+" because it wasnt mine");
+				notThisEdge_exeption.printStackTrace();
+			}
 		}
 		return null;
 	}
 
-    public boolean isEmpty() {
-        return !busy;
-	}
-
-	public void fill()throws  AlreadyFilledExeption{
-	    if(busy)
-	        throw new AlreadyFilledExeption();
-	    else
-	        busy = true;
-    }
-    public void leave()throws NotFullExeption{
-	    if(!busy)
-	        throw new NotFullExeption();
-        else
-            busy = false;
-	}
 }
