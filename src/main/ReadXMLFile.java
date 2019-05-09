@@ -1,16 +1,16 @@
-import org.w3c.dom.Document;
+package main;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+//import org.w3c.dom.Document;
+
+//import javax.xml.parsers.DocumentBuilder;
+//import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+//import java.io.FileNotFoundException;
+//import java.util.ArrayList;
 import java.util.List;
 
-//import org.xml.sax.*;
-//import java.util.*;
 
 public class ReadXMLFile {
 
@@ -26,7 +26,7 @@ public class ReadXMLFile {
 
 
     public void inits(){
-        File xmlFile = new File("C:/Users/Cavaco/IdeaProjects/ProjPOO2019/resources/data1.xml");
+        File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
         fileName=xmlFile.getName();
 
         try {
@@ -38,9 +38,9 @@ public class ReadXMLFile {
             //saxParser.parse(xmlFile,handler);//new File(fileName), handler);
             saxParser.parse(new File(fileName),handler);
 
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc=null;
+  //          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+  //          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+  //          Document doc=null;
 
 //            doc = dBuilder.parse(xmlFile);
 

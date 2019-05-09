@@ -1,3 +1,5 @@
+package main;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -11,9 +13,9 @@ public class SAXHandler extends DefaultHandler{
     private List<Integer> nodes = new ArrayList<>();
     private List<Integer> target_nodes = new ArrayList<>();
     
-    private int node1, node2;
+    private int node1;
     private List<Float> edges = null; 
-    private float edge;
+//    private float edge;
     
     private ArrayList<Integer> parametersInt=new ArrayList<>();
     private ArrayList<Float> parametersFloat=new ArrayList<>();
@@ -33,7 +35,6 @@ public class SAXHandler extends DefaultHandler{
 	float delta;
     
    // private float node1;
-   // private float node2;
     
     
     static String fileName;
@@ -110,8 +111,7 @@ public class SAXHandler extends DefaultHandler{
         	 if(attributes.getLength() > 0){
         		 
         		 String t_node = attributes.getValue("targetnode");
-        		// node2=Integer.valueOf(t_node);
-        		// node2 = new Node(Integer.valueOf(t_node));
+        		
         		 int targ_node=Integer.valueOf(t_node);
         		 
         		 //System.out.print("Target node: " + Integer.valueOf(t_node));
@@ -160,8 +160,7 @@ public class SAXHandler extends DefaultHandler{
 		
 		   case "weight":      float peso = Float.valueOf(currentValue);
            					  // System.out.print(" Peso: " + peso + "\n");
-		   					   //edge = new Edge(peso,evap1, evap2, node1,node2);
-		   					  
+		   					   
 		   					   edges.add(peso);
 		   					   
 		                       break;

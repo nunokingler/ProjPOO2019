@@ -1,3 +1,6 @@
+package exception;
+import property.Edge;
+
 public class NotThisEdge_exeption extends Throwable {
     private Edge this_edge;
     private int this_node;

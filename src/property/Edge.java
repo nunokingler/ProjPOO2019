@@ -1,3 +1,9 @@
+package property;
+import event.EvaporationEvent;
+import event.Event;
+import event.EventHolder;
+import exception.NotThisEdge_exeption;
+
 public class Edge implements EventHolder{
 
 	private float weight;
@@ -23,7 +29,9 @@ public class Edge implements EventHolder{
 	}
 
     public boolean evaporate(float evaporationValue) {
-	    float next_pheromone = pheromoneLevel-evaporationValue;
+
+	    float next_pheromone = pheromoneLevel-evaporationValue;//TODO EVAPORATION FORMULA
+
 	    if(next_pheromone>0){
 	    	pheromoneLevel=next_pheromone;
 	    	return true;
@@ -58,7 +66,7 @@ public class Edge implements EventHolder{
 		if (o == null || getClass() != o.getClass()) return false;
 		Edge edge = (Edge) o;
 		return node1 == edge.node1 &&
-				node2 == edge.node2;
+			   node2 == edge.node2;
 	}
 
 	@Override

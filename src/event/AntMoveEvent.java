@@ -1,3 +1,7 @@
+package event;
+import ant.Ant;
+import pec.PEC;
+import pec.PecHolder;
 
 public class AntMoveEvent implements Event {
     private float sigma;

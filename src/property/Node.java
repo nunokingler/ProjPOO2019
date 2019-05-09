@@ -1,5 +1,10 @@
+package property;
 
 import java.util.*;
+
+import exception.AlreadyFilledExeption;
+import exception.NotFullExeption;
+import exception.NotThisEdge_exeption;
 
 public class Node {
 	

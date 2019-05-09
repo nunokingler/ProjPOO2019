@@ -1,3 +1,10 @@
+package simulation;
+import ant.AntColony;
+import event.AntMoveEvent;
+import event.EvaporationEvent;
+import event.Event;
+import pec.PecHolder;
+
 public class Observation implements Event{
     private float time,maxTime;
     private int observation,steps;

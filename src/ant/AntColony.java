@@ -1,3 +1,13 @@
+package ant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
+import exception.NotThisEdge_exeption;
+import property.Node;
+
+import simulation.*;
+
 import java.util.*;
 
 public class AntColony {
@@ -15,7 +25,7 @@ public class AntColony {
 	private float gamma;
 
 
-	AntColony(int _Antsnumber, Graph graph, int Starting_node){
+	public AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
 
 		antsnumber=_Antsnumber;
