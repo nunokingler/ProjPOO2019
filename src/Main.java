@@ -1,9 +1,9 @@
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class  Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         PEC pec = PecHolder.pec;
        // Simulation s = new Simulation(20,0,0,50,1);
 
@@ -11,7 +11,9 @@ public class  Main {
         //s.addNode();
 
         ReadXMLFile read = new ReadXMLFile();
+
         read.inits();
+
         List<Integer> inters= read.getIntParameteres();//pos 0= antcolsize, pos 1=nestNode
         List<Float> floaters = read.getFloatParameters();//pos 0= finalinst, pos 1=plevel, pos 2 = eta(n),pos 3= rho(p)
 
@@ -55,6 +57,5 @@ public class  Main {
             ev.getMessage();
             ev.printStackTrace();
         }
-        System.out.println("test");
     }
 }
