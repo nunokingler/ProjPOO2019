@@ -98,7 +98,7 @@ public class Graph {
 			try {
 				edge=previNode.getEdgeTo(node);
 				edge=previNode.getEdgeTo(node);
-				edge.addPheromones(edge.getWeight()*valueToAdd);
+				edge.addPheromones(edge.getWeight()*valueToAdd);//TODO aqui e o peso de todas as arestas
 			} catch (NotThisEdge_exeption notThisEdge_exeption) {
 				notThisEdge_exeption.printStackTrace();
 			}
