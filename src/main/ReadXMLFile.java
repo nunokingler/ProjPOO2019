@@ -24,9 +24,10 @@ public class ReadXMLFile {
         super();
     }
 
-
-    public void inits(){
-        File xmlFile = new File("C:/Users/henri/git/ProjPOO2019/resources/data1.xml");
+    /** method used to read a file and getting the nessesary data prepared
+* */
+    public void inits(String pathname){
+        File xmlFile = new File(pathname);
         fileName=xmlFile.getName();
 
         try {
@@ -50,6 +51,8 @@ public class ReadXMLFile {
             e.printStackTrace();
         }
     }
+    /** methods used to read the data from the file
+     * */
     public List<Integer> getIntParameteres(){
         return handler.getParamInt();
     }

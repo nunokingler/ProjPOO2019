@@ -1,20 +1,16 @@
 package ant;
+import exception.NotThisEdge_exeption;
+import property.Node;
+import simulation.Graph;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
-import exception.NotThisEdge_exeption;
-import property.Node;
-
-import simulation.*;
-
-import java.util.*;
 
 public class AntColony {
 
 	private int antsnumber,maxAnts;
 	private ArrayList<Ant> ants;
-	private HashMap<String,ArrayList<Node>> hamiltonians;
 	private ArrayList<Node> best_ham;
 	private float best_ham_weight;
 	private Node starting_node;
@@ -24,14 +20,17 @@ public class AntColony {
 	private float delta;
 	private float gamma;
 
-
+	/* Default constructor for AntColony
+        @param _Antsnumber the max number of ants of this colony
+        @param graph the graph where this colony is placed
+        @return int starting_node the number of node containing this ant colony
+    * */
 	public AntColony(int _Antsnumber, Graph graph, int Starting_node){
 		this.maxAnts = _Antsnumber;
 
 		antsnumber=_Antsnumber;
 		this.graph=graph;
 		this.starting_node=graph.getNode(Starting_node);
-		hamiltonians =new HashMap<>();
 		alpha=0;
 		beta=0;
 		delta =0;
@@ -42,6 +41,7 @@ public class AntColony {
 			ants.add(new Ant(this,starting_node, delta));
 		}
 	}
+
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
 	}
@@ -57,7 +57,10 @@ public class AntColony {
 	public void setGamma(float gamma) {
 		this.gamma = gamma;
 	}
-
+	/* Evaluates if a certain cicle is hamiltonian or not
+        @param pathTaken the path done by the cicle
+        @return true if the cicle is hamiltonian, false otherwise
+    * */
 	public boolean isHamiltonian(List<Node> pathTaken){
 		ListIterator<Node> path=pathTaken.listIterator();
    		int nodes[]= new int[graph.getNodeNumber()];

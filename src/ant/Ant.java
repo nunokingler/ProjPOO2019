@@ -1,8 +1,4 @@
 package ant;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Random;
-
 import event.AntMoveEvent;
 import event.Event;
 import event.EventHolder;
@@ -11,7 +7,9 @@ import pec.PEC;
 import property.Edge;
 import property.Node;
 
-import exception.*;
+import java.util.ArrayList;
+import java.util.ListIterator;
+import java.util.Random;
 
 public class Ant implements EventHolder{
 	
@@ -30,7 +28,7 @@ public class Ant implements EventHolder{
         path=new ArrayList<>();
         path.add(current_node);
         this.colony=colony;
-        event = new AntMoveEvent(this,sig);
+        event = new AntMoveEvent(this);
     }
 /* This method calculates what the next hop location will be acording to the current path and returns the travel time of
     the edge chosen

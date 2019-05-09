@@ -19,7 +19,11 @@ public class Edge implements EventHolder{
 		this.node2=e.node2;
 		this.event = e.event;
 	}
-
+	/** Default constructor for Edge
+        @param evaporationTime parameter regargint the time for each evaporation
+        @param evaporationValue amount taken each evaporation
+        @param node1, node2 nodes that this edge connects
+    * */
 	public Edge(float weight, float evaporationTime,float evaporationValue, Node node1, Node node2) {
 		this.weight = weight;
 		this.evaporation = 0;
@@ -27,7 +31,10 @@ public class Edge implements EventHolder{
 		this.node2 = node2;
 		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);
 	}
-
+	/** evaporates according to the value given by
+	@param evaporationValue
+	@returns true if there is more pheromones to evaporate(another event needs to occur) false otherwise
+    * */
     public boolean evaporate(float evaporationValue) {
 
 	    float next_pheromone = pheromoneLevel-evaporationValue;//TODO EVAPORATION FORMULA
@@ -49,7 +56,9 @@ public class Edge implements EventHolder{
 	public float getPheromoneLevel() {
 		return pheromoneLevel;
 	}
-
+	/** returns the node that is not referenced in @param N , @throws NotThisEdge_exeption if the edge does not contain N
+	@returns Node other node
+    * */
 	public Node otherNode(Node N)throws NotThisEdge_exeption{
 		if(N.getID()==node1.getID()){
 			return node2;

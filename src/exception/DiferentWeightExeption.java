@@ -1,5 +1,5 @@
 package exception;
-public class DiferentWeightExeption extends Throwable {
+public class DiferentWeightExeption extends Exception {
     public DiferentWeightExeption(String message) {
         super(message);
     }

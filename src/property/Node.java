@@ -1,23 +1,30 @@
 package property;
 
-import java.util.*;
-
 import exception.AlreadyFilledExeption;
 import exception.NotFullExeption;
 import exception.NotThisEdge_exeption;
+
+import java.util.ArrayList;
+import java.util.ListIterator;
+import java.util.Objects;
 
 public class Node {
 	
 		private int nodeidx;
 		private ArrayList<Edge> edges;
 		private boolean busy;
-
+	/** Constructor for node that already references edges
+	@param nodeidx node ID
+	@param edges edges
+    * */
 	public Node(int nodeidx, ArrayList<Edge> edges) {
 		this.nodeidx = nodeidx;
 		this.edges = edges;
 		busy = false;
 	}
-
+	/** Default constructor for Node
+	@param nodeidx node ID
+    * */
     public Node(int nodeidx) {
         this.nodeidx = nodeidx;
         this.edges = new ArrayList<>();
@@ -32,13 +39,7 @@ public class Node {
 	}
 
 	public ListIterator<Edge> getEdges(){
-	/*
-		ArrayList<Edge> edg = new ArrayList<Edge>();
-		for(int i= 0;i<edges.size();i++){
-			edg.add( new Edge(edges.get(i)));
-		}
-		return edg.listIterator(edg.size());*/
-	return edges.listIterator();
+		return edges.listIterator();
 	}
 
 	@Override
@@ -68,6 +69,9 @@ public class Node {
 				"nodeidx=" + nodeidx +
 				'}';
 	}
+	/** checks if this node contains an edge to the node with number @param other_nodeNmbr
+	@returns boolean true if the edge exits, false otherwise
+* */
 	public boolean hasEdge(int other_nodeNmbr) throws NotThisEdge_exeption {
 		for(int i =0;i<edges.size();i++){
 			if(this.edges.get(i).otherNode(this).getID()==other_nodeNmbr)
@@ -75,7 +79,9 @@ public class Node {
 		}
 		return false;
 	}
-
+	/** returns the weight of the edge to node @param other
+	@returns float weight
+    * */
 	public float getEdgeToWeight(int other) throws NotThisEdge_exeption {
 		for(int i =0;i<edges.size();i++){
 			if(this.edges.get(i).otherNode(this).getID()==other)
@@ -83,7 +89,9 @@ public class Node {
 		}
 		return -1;
 	}
-
+	/** Returns the edge to node @param node
+	*  @returns edge said edge
+    * */
 	public Edge getEdgeTo(Node node) throws NotThisEdge_exeption {
 		for(int i =0;i<edges.size();i++){
 			if(this.edges.get(i).otherNode(this).getID()==node.getID())
@@ -95,6 +103,7 @@ public class Node {
     public boolean isEmpty() {
         return !busy;
 	}
+
 	public void fill()throws  AlreadyFilledExeption{
 	    if(busy)
 	        throw new AlreadyFilledExeption();

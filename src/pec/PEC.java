@@ -1,16 +1,15 @@
 package pec;
 
-import exception.*;
+import event.EvaporationEvent;
+import event.Event;
+import exception.NoEventException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-import event.EvaporationEvent;
-import event.Event;
-
-/**
+/***
  * Created by Cavaco on 28-Apr-19.
  */
 public class PEC {

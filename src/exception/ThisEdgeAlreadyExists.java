@@ -1,5 +1,5 @@
 package exception;
-public class ThisEdgeAlreadyExists extends Throwable {
+public class ThisEdgeAlreadyExists extends Exception {
     public ThisEdgeAlreadyExists() {super();
     }
 }

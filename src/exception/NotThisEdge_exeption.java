@@ -1,7 +1,7 @@
 package exception;
 import property.Edge;
 
-public class NotThisEdge_exeption extends Throwable {
+public class NotThisEdge_exeption extends Exception {
     private Edge this_edge;
     private int this_node;
     public NotThisEdge_exeption(String message,Edge thisEdge,int node) {
