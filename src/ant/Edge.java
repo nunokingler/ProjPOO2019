@@ -100,4 +100,8 @@ public class Edge implements EventHolder{
 		}
 		pheromoneLevel+=value_to_add;
 	}
+
+    public void setWeight(float weight) {
+		this.weight=weight;
+    }
 }

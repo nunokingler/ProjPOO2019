@@ -39,6 +39,9 @@ public class Graph {
 			nodes.put(node2, new Node(node2));
 
 		if(nodes.get(node1).hasEdge(node2)){
+			Edge edg=nodes.get(node1).getEdgeTo(nodes.get(node2));
+			if(edg.getWeight()>weight)
+				edg.setWeight(weight);
 			throw new ThisEdgeAlreadyExists();
 		}
 

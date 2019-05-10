@@ -35,7 +35,7 @@ public class  Main {
             try {
                 simul.addEdge(node1.get(i),node2.get(i),weights.get(i));//add it to the graph
             } catch (ThisEdgeAlreadyExists thisEdgeAlreadyExists) {
-                thisEdgeAlreadyExists.printStackTrace();
+                //thisEdgeAlreadyExists.printStackTrace();
             }
         }
         try {
