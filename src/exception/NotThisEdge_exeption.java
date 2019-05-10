@@ -1,6 +1,7 @@
 package exception;
 import ant.Edge;
-
+/**Exception called by {@link Edge} when getOtherNode({@link ant.Node}) gets called and the node given is not linked by
+ * the {@link Edge} */
 public class NotThisEdge_exeption extends Exception {
     private Edge this_edge;
     private int this_node;

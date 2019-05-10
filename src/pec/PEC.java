@@ -10,6 +10,7 @@ import java.util.Random;
 /***
  * Created by Cavaco on 28-Apr-19.
  */
+/**{@link PEC} implements an event scheduler sorted by {@link Event}.getTime() */
 public class PEC {
 
     private ArrayList<Event> events;
@@ -21,7 +22,7 @@ public class PEC {
         this.events = new ArrayList<>() ;
         currentTime=0;
     }
-    /**Returns the next event
+    /**Returns the next event with the lowest getTime()
      * @return Event the event with the lowest getTime()
      * @throws NoEventException if there is no events left on the PEC
      *  */

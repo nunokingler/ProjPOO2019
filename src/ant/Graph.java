@@ -5,7 +5,9 @@ import exception.ThisEdgeAlreadyExists;
 
 import java.util.HashMap;
 import java.util.ListIterator;
-
+/**
+ * {@link Graph} class, contains {@link Node}s  and {@link Edge}s in a way that no 2 nodes can have the same ID and
+ * no 2 edges can connect to the same nodes*/
 public class Graph {
 
 	private HashMap<Integer,Node> nodes;

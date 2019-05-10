@@ -2,7 +2,7 @@ package event;
 import pec.PEC;
 import pec.PecHolder;
 import ant.Edge;
-
+/**{@link EvaporationEvent} implements removal of pheromones from an {@link Edge} as an {@link Event} */
 public class EvaporationEvent implements Event{
     private float n // related to time
             ,p;     //related to value

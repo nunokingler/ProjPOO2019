@@ -1,9 +1,9 @@
 package event;
-/** This Interface describes a class that has events
+/** This Interface describes a class that holds 1 {@link Event}
 * */
 public interface EventHolder {
-    /** get said event
-     * @return Event
+    /** Get the event this instance contains
+     * @return said Event
 *   */
     Event getEvent();
 }

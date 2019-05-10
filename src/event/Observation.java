@@ -1,7 +1,7 @@
 package event;
 import ant.AntColony;
 import pec.PecHolder;
-
+/**{@link Observation} implements outputs to the console as events, only 1 output is in a pec @ a time(unless more than 1 instance is created)  */
 public class Observation implements Event{
     private float time,maxTime;
     private int observation,steps;

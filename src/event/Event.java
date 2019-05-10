@@ -1,4 +1,6 @@
 package event;
+/**
+ *  {@link Event} defines an event that ocurrs @ time getTime() and does the event as an implementation of doEvent()*/
 public interface Event{
     /** Does the refered event
 

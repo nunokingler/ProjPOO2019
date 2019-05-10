@@ -3,18 +3,20 @@ import event.EvaporationEvent;
 import event.Event;
 import event.EventHolder;
 import exception.NotThisEdge_exeption;
-
+/**{@link Edge} class, links 2 {@link Node}s, also has an assosiated weight, pheromoneLevel and {@link Event} */
 public class Edge implements EventHolder{
 
 	private float weight;
-	private float pheromoneLevel;
-	private float evaporation;
-	private Node node1,node2;
+	/**
+	 * Current pheromone level for this edge */
+	protected float pheromoneLevel;
+	/**
+	 * The nodes that this edge connects */
+	protected Node node1,node2;
 	private EvaporationEvent event;
 
 	public Edge(Edge e) {
 		this.weight=e.weight;
-		this.evaporation=e.evaporation;
 		this.node1=e.node1;
 		this.node2=e.node2;
 		this.event = e.event;
@@ -29,7 +31,6 @@ public class Edge implements EventHolder{
     * */
 	public Edge(float weight, float evaporationTime,float evaporationValue, Node node1, Node node2) {
 		this.weight = weight;
-		this.evaporation = 0;
 		this.node1 = node1;
 		this.node2 = node2;
 		this.event=new EvaporationEvent(this,evaporationTime,evaporationValue);

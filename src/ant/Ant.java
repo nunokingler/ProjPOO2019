@@ -8,14 +8,24 @@ import pec.PEC;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Random;
-
+/**{@link Ant} class, implements the static function to calculate the probabilities of hopping to the next node and
+ * the function that actually performs the jump
+ * */
 public class Ant implements EventHolder{
-	
-    private Node current_node;
-    private ArrayList<Node> path;
+	/**
+     * The current node where the ant is located*/
+    protected Node current_node;
+    /**
+     * The path the ant traveled to get here
+     * */
+    protected ArrayList<Node> path;
  // private float alpha, beta;
-    private AntColony colony;
-    private AntMoveEvent event;
+ /**
+    The {@link AntColony} that spawned this ant*/
+    protected AntColony colony;
+    /**
+     * The event used to move the ant*/
+    protected AntMoveEvent event;
     /** Default constructor for ant
         @param colony the colony this ant belongs to, it is used to get parameters regaring movement
         @param current_node the starting node for this ant

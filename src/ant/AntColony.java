@@ -2,15 +2,26 @@ package ant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
+/**
+ * {@link AntColony} class, holds all the {@link Ant}s and the graph in wich they move*/
 public class AntColony {
 
 	private int antsnumber,maxAnts;
-	private ArrayList<Ant> ants;
-	private ArrayList<Node> best_ham;
-	private float best_ham_weight;
-	private Node starting_node;
-	private Graph graph;
+	/**
+	 * The List of all the {@link Ant}s belonghing to this colony*/
+	protected ArrayList<Ant> ants;
+	/**
+	 * The best hamiltonian path found untill now*/
+	protected ArrayList<Node> best_ham;
+	/**
+	 * The weight of all the nodes used on best ham*/
+	protected float best_ham_weight;
+	/**
+	 * The node where the colony is located*/
+	protected Node starting_node;
+	/**
+	 * The {@link Graph} that the ants travel through*/
+	protected Graph graph;
 	private float alpha;
 	private float beta;
 	private float delta;

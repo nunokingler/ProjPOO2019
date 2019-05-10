@@ -2,7 +2,7 @@ package event;
 import ant.Ant;
 import pec.PEC;
 import pec.PecHolder;
-
+/**{@link AntMoveEvent} implements moving an {@link Ant} as an {@link Event} */
 public class AntMoveEvent implements Event {
     private double time_for_next_move;
     private Ant ant;

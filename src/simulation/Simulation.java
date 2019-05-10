@@ -4,7 +4,7 @@ import ant.Graph;
 import event.Observation;
 import exception.AntsAlreadyLoadedExeption;
 import exception.ThisEdgeAlreadyExists;
-
+/**Top class of the project, it is with this class that {@link main.Main} interacts with the program */
 public class Simulation {
 
 	private float finalinst;

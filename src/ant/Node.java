@@ -5,7 +5,8 @@ import exception.NotThisEdge_exeption;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Objects;
-
+/**{@link Node} class, has a ID and a list containing all the {@link Edge} that this node connects to
+ * */
 public class Node {
 	
 		private int nodeidx;

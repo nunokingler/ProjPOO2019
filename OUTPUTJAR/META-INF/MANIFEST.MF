@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Class-Path: rt.jar jce.jar jfr.jar jsse.jar deploy.jar javaws.jar jfxs
+ wt.jar plugin.jar charsets.jar resources.jar management-agent.jar cha
+ rsets.jar deploy.jar javaws.jar jce.jar jfr.jar jfxswt.jar jsse.jar p
+ lugin.jar rt.jar
+Main-Class: main.Main
+
